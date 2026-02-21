@@ -1,0 +1,557 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Menu, X, ArrowUpRight, ChevronRight, Play,
+  Globe2, Sparkles, BookOpen, Users, 
+  MapPin, FileText, CheckCircle2, GraduationCap, 
+  Award, Compass, Library, ArrowRight
+} from 'lucide-react';
+
+export default function App() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeCycle, setActiveCycle] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+    setMobileMenuOpen(false);
+  };
+
+  const cycles = [
+    {
+      name: "Maternelle",
+      age: "3-5 ans",
+      tagline: "L'éveil par l'exploration.",
+      desc: "Un environnement bilingue bienveillant où chaque enfant construit ses premiers repères.",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200",
+      stats: "Bilinguisme précoce"
+    },
+    {
+      name: "Élémentaire",
+      age: "6-10 ans",
+      tagline: "Les fondations du savoir.",
+      desc: "Acquisition des savoirs fondamentaux et ouverture sur le monde avec la méthode singapourienne.",
+      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1200",
+      stats: "Méthode innovante"
+    },
+    {
+      name: "Collège",
+      age: "11-14 ans",
+      tagline: "Forger l'esprit critique.",
+      desc: "Développement de l'autonomie et préparation rigoureuse au Diplôme National du Brevet.",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
+      stats: "100% réussite au Brevet"
+    },
+    {
+      name: "Lycée",
+      age: "15-18 ans",
+      tagline: "L'excellence globale.",
+      desc: "Un accompagnement personnalisé vers le Baccalauréat et les meilleures universités mondiales.",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200",
+      stats: "85% de mentions"
+    }
+  ];
+
+  const renderHome = () => (
+    <>
+      <main className="relative pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-[90vh] flex flex-col justify-center animate-in fade-in duration-1000 slide-in-from-bottom-8">
+        <div className="relative z-10 flex flex-col items-center text-center mt-12">
+          
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-blue-900/10 bg-white/60 backdrop-blur-xl shadow-lg shadow-blue-900/5 text-sm font-bold text-blue-950 mb-10 hover:scale-105 transition-transform cursor-default">
+            <Sparkles size={16} className="text-amber-500" />
+            Établissement d'Excellence AEFE
+          </div>
+
+          <h1 className="font-serif text-6xl md:text-8xl lg:text-[11rem] font-bold tracking-tight text-blue-950 leading-[0.9] mb-8 relative z-10">
+            Cultiver<br/>
+            <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-blue-600 to-blue-900 animate-gradient inline-block pr-4">
+              l'Excellence.
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-slate-600 max-w-2xl font-light tracking-wide mb-14 leading-relaxed mix-blend-multiply">
+            De la maternelle au baccalauréat, le Lycée Français de Kuala Lumpur forge les esprits brillants de demain dans un écrin multiculturel.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+            <button 
+              onClick={() => navigateTo('admissions')}
+              className="group px-10 py-5 rounded-full bg-blue-950 text-white font-semibold flex items-center justify-center gap-4 transition-all hover:bg-blue-900 hover:shadow-2xl hover:shadow-blue-900/30 overflow-hidden relative"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                Inscriptions 2026 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/0 via-amber-500/20 to-amber-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            </button>
+            <button className="group px-10 py-5 rounded-full border border-slate-300 hover:border-blue-950 hover:text-blue-950 text-slate-700 bg-white/50 backdrop-blur-md font-semibold flex items-center justify-center gap-4 transition-all">
+              <Play size={20} className="fill-current group-hover:scale-110 transition-transform" /> 
+              Le Film Institutionnel
+            </button>
+          </div>
+        </div>
+
+        {/* METRICS - HAUTE COUTURE CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-40 relative z-10">
+          {[
+            { label: "Réussite au Baccalauréat", value: "100%", icon: <GraduationCap size={40} className="text-amber-500" /> },
+            { label: "Nationalités sur le campus", value: "45+", icon: <Globe2 size={40} className="text-blue-600" /> },
+            { label: "Élèves épanouis", value: "800", icon: <Users size={40} className="text-red-500" /> }
+          ].map((stat, i) => (
+            <div key={i} className="relative p-10 rounded-[2.5rem] bg-white/60 backdrop-blur-2xl border border-white shadow-xl shadow-slate-200/50 group hover:-translate-y-3 transition-all duration-500 overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700">
+                {stat.icon}
+              </div>
+              <div className="relative z-10">
+                <p className="font-serif text-6xl font-bold text-blue-950 tracking-tight mb-4">{stat.value}</p>
+                <div className="h-px w-12 bg-amber-500/50 mb-4 group-hover:w-24 transition-all duration-500" />
+                <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">{stat.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {/* SECTION INTERACTIVE : LE PARCOURS */}
+      <section className="py-40 px-6 max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          
+          <div className="w-full lg:w-5/12 flex flex-col gap-4">
+            <div className="mb-10">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-px w-8 bg-red-500" />
+                <h2 className="text-sm font-bold text-red-500 tracking-[0.2em] uppercase">Curriculum</h2>
+              </div>
+              <h3 className="font-serif text-5xl md:text-6xl font-bold text-blue-950 tracking-tight leading-tight">
+                Une scolarité<br/><span className="italic text-blue-600">sur-mesure.</span>
+              </h3>
+            </div>
+            
+            <div className="flex flex-col gap-3">
+              {cycles.map((cycle, index) => (
+                <button 
+                  key={index}
+                  onClick={() => setActiveCycle(index)}
+                  className={`group text-left p-6 rounded-[2rem] transition-all duration-500 border ${
+                    activeCycle === index 
+                      ? 'bg-blue-950 border-blue-950 text-white shadow-2xl shadow-blue-950/20 scale-[1.02]' 
+                      : 'bg-white/50 border-white/60 text-slate-500 hover:bg-white hover:border-slate-200 backdrop-blur-md'
+                  }`}
+                >
+                  <div className="flex justify-between items-center mb-1">
+                    <span className={`font-serif text-2xl font-bold ${activeCycle === index ? 'text-white' : 'text-blue-950'}`}>
+                      {cycle.name}
+                    </span>
+                    <ArrowRight size={20} className={`transition-transform duration-300 ${activeCycle === index ? 'text-amber-400 translate-x-1' : 'text-transparent -translate-x-4 group-hover:text-blue-300 group-hover:translate-x-0'}`} />
+                  </div>
+                  <span className={`text-xs font-bold uppercase tracking-widest block ${activeCycle === index ? 'text-blue-300' : 'text-slate-400'}`}>
+                    {cycle.age}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full lg:w-7/12 h-[600px] relative rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl shadow-blue-900/10 group">
+            {cycles.map((cycle, index) => (
+              <div 
+                key={index}
+                className={`absolute inset-0 transition-all duration-1000 ease-in-out ${activeCycle === index ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'}`}
+              >
+                <img 
+                  src={cycle.image} 
+                  alt={cycle.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/20 to-transparent opacity-90" />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-12">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 backdrop-blur-md text-amber-300 text-sm font-bold border border-amber-500/30 mb-6">
+                    <Sparkles size={16} /> {cycle.stats}
+                  </div>
+                  <h3 className="font-serif text-5xl font-bold text-white mb-4 leading-tight">{cycle.tagline}</h3>
+                  <p className="text-blue-100 text-lg max-w-md font-light leading-relaxed mb-8">{cycle.desc}</p>
+                  
+                  <button onClick={() => navigateTo('academic')} className="inline-flex items-center gap-3 text-white font-bold hover:text-amber-400 transition-colors group/btn">
+                    Découvrir le programme <span className="p-3 rounded-full bg-white/10 group-hover/btn:bg-amber-400 group-hover/btn:text-blue-950 transition-colors"><ArrowUpRight size={20} /></span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+
+  const renderDiscover = () => (
+    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
+      
+      {/* 1962 filigrane géant */}
+      <div className="absolute top-20 right-0 text-[20rem] font-serif font-black text-slate-900/[0.03] select-none pointer-events-none z-0">
+        1962
+      </div>
+
+      <div className="relative z-10 max-w-4xl mb-24">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px w-12 bg-amber-500" />
+          <h2 className="text-sm font-bold text-amber-600 tracking-[0.2em] uppercase">Héritage</h2>
+        </div>
+        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-10">
+          L'histoire d'une<br/><span className="italic text-blue-600">vision globale.</span>
+        </h1>
+        <p className="text-2xl text-slate-600 font-light leading-relaxed border-l-4 border-blue-950 pl-8">
+          Depuis plus de 60 ans, le Lycée Français de Kuala Lumpur incarne le trait d'union parfait entre la rigueur académique française et l'ouverture sur l'Asie.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="md:col-span-7 h-[600px] rounded-[3rem] overflow-hidden relative shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=1200" alt="Histoire" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
+          <div className="absolute inset-0 bg-blue-950/20 mix-blend-multiply" />
+        </div>
+        
+        <div className="md:col-span-5 flex flex-col gap-8 md:-ml-16 z-20">
+          <div className="bg-white/90 backdrop-blur-2xl p-12 rounded-[2.5rem] shadow-xl border border-white/50">
+            <Library className="text-blue-600 mb-6" size={40} />
+            <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">Un patrimoine vivant</h3>
+            <p className="text-slate-600 leading-relaxed font-light">
+              Né d'une volonté de rayonnement culturel, notre établissement a su évoluer avec son temps pour devenir une référence éducative incontournable en Asie du Sud-Est.
+            </p>
+          </div>
+          
+          <div className="bg-blue-950 p-12 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
+            <div className="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-150 transition-transform duration-1000">
+              <Globe2 size={200} />
+            </div>
+            <h3 className="font-serif text-3xl font-bold mb-4 relative z-10">Réseau AEFE</h3>
+            <p className="text-blue-100/80 leading-relaxed font-light mb-8 relative z-10">
+              Appartenir au plus grand réseau éducatif mondial, garantissant une continuité scolaire d'excellence dans 138 pays.
+            </p>
+            <button className="text-amber-400 font-bold flex items-center gap-2 hover:gap-4 transition-all relative z-10">
+              Découvrir le réseau <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+
+  const renderAcademic = () => (
+    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
+      <div className="text-center max-w-4xl mx-auto mb-24">
+        <div className="inline-flex justify-center items-center w-20 h-20 rounded-full bg-amber-100 text-amber-600 mb-8 shadow-inner">
+          <Award size={40} />
+        </div>
+        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-8">
+          Excellence <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Pédagogique.</span>
+        </h1>
+        <p className="text-2xl text-slate-600 font-light leading-relaxed">
+          Un curriculum français d'exigence, sublimé par un bilinguisme précoce et des méthodologies d'enseignement avant-gardistes.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {[
+          { title: "Bilinguisme Intégré", desc: "Immersion totale en français et anglais dès la maternelle. Préparation intensive aux certifications Cambridge (IELTS).", icon: <Globe2 size={48} />, img: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=800" },
+          { title: "Sciences & Avenir", desc: "Laboratoires de pointe, initiation au code, robotique et approche expérimentale renforcée pour former les innovateurs.", icon: <Compass size={48} />, img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800" },
+          { title: "Humanités & Arts", desc: "Épanouissement par la culture : théâtre, arts plastiques, musique et développement poussé du sens critique.", icon: <BookOpen size={48} />, img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" }
+        ].map((item, i) => (
+          <div key={i} className="group rounded-[3rem] bg-white border border-white/60 shadow-xl shadow-slate-200/50 overflow-hidden hover:-translate-y-4 transition-all duration-500">
+            <div className="h-64 overflow-hidden relative">
+              <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-blue-950/40 mix-blend-multiply" />
+              <div className="absolute bottom-[-24px] right-8 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-xl rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                {item.icon}
+              </div>
+            </div>
+            <div className="p-10 pt-12">
+              <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">{item.title}</h3>
+              <p className="text-slate-600 font-light leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+
+  const renderCampus = () => (
+    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
+       <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px w-12 bg-blue-600" />
+            <h2 className="text-sm font-bold text-blue-600 tracking-[0.2em] uppercase">Notre Écrin</h2>
+          </div>
+          <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1]">
+            Un campus pensé<br/><span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-amber-500">pour grandir.</span>
+          </h1>
+        </div>
+        <button className="hidden md:flex items-center gap-3 px-8 py-4 rounded-full bg-white border border-slate-200 text-blue-950 font-bold hover:bg-slate-50 transition-colors shadow-sm">
+          <MapPin size={20} className="text-red-500" /> Venir nous voir
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        {/* Grande image Cinematic */}
+        <div className="md:col-span-12 h-[600px] rounded-[3rem] overflow-hidden relative shadow-2xl group">
+           <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=2000" alt="Campus" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+           <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/20 to-transparent opacity-80" />
+           
+           <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-8">
+              <div className="max-w-xl">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-bold border border-white/30 mb-4">
+                  <Sparkles size={16} className="text-amber-400" /> Infrastructures Premium
+                </div>
+                <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Complexe Sportif</h3>
+                <p className="text-blue-100 text-lg font-light leading-relaxed">Piscine semi-olympique, mur d'escalade professionnel, terrains multisports et gymnase climatisé dernière génération.</p>
+              </div>
+           </div>
+        </div>
+
+        {/* Cartes inférieures */}
+        <div className="md:col-span-5 h-[400px] rounded-[3rem] bg-white border border-slate-200 shadow-xl shadow-slate-200/40 p-12 flex flex-col justify-center relative overflow-hidden group">
+           <div className="absolute right-[-20%] top-[-20%] w-64 h-64 bg-amber-50 rounded-full blur-3xl opacity-50 group-hover:bg-amber-100 transition-colors" />
+           <MapPin size={48} className="text-amber-500 mb-8 relative z-10" />
+           <h3 className="font-serif text-4xl font-bold text-blue-950 mb-4 relative z-10">Oasis Urbaine</h3>
+           <p className="text-slate-600 text-lg font-light leading-relaxed relative z-10">Niché à Segambut, à quelques minutes du cœur vibrant de Kuala Lumpur, dans un environnement verdoyant et hautement sécurisé.</p>
+        </div>
+
+        <div className="md:col-span-7 h-[400px] rounded-[3rem] bg-blue-950 text-white shadow-xl shadow-blue-900/30 p-12 flex flex-col justify-center relative overflow-hidden group">
+           <div className="absolute right-0 top-0 w-full h-full opacity-20 bg-[url('https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center mix-blend-overlay group-hover:scale-110 transition-transform duration-1000" />
+           <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-950/90 to-transparent" />
+           
+           <div className="relative z-10 max-w-lg">
+             <Library size={48} className="text-blue-400 mb-8" />
+             <h3 className="font-serif text-4xl font-bold mb-4">Espaces de Savoir</h3>
+             <p className="text-blue-100/80 text-lg font-light leading-relaxed">Un CDI immersif, une restauration pensée par un chef français, et des zones de créativité conçues pour le bien-être des élèves.</p>
+           </div>
+        </div>
+      </div>
+    </main>
+  );
+
+  const renderAdmissions = () => (
+    <main className="relative pt-40 pb-32 px-6 max-w-4xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
+      <div className="text-center mb-24">
+        <h2 className="text-sm font-bold text-red-600 tracking-[0.2em] uppercase mb-6">Processus 2026-2027</h2>
+        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-8">
+          Rejoindre <br/><span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">l'Élite.</span>
+        </h1>
+        <p className="text-2xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+          Les portes de l'excellence vous sont ouvertes. Découvrez notre processus d'admission simplifié et exclusif.
+        </p>
+      </div>
+
+      <div className="relative">
+        {/* Ligne directrice (Timeline) */}
+        <div className="absolute left-[39px] top-10 bottom-10 w-px bg-gradient-to-b from-blue-200 via-blue-200 to-transparent hidden md:block" />
+
+        <div className="space-y-12">
+          {[
+            { step: "01", title: "Découverte & Rencontre", desc: "Participez à une visite privée du campus avec notre équipe de direction pour projeter l'avenir de votre enfant.", icon: <Compass /> },
+            { step: "02", title: "Dossier Numérique", desc: "Soumission de votre dossier scolaire et administratif via notre portail sécurisé hautement confidentiel.", icon: <FileText /> },
+            { step: "03", title: "Commission d'Étude", desc: "Analyse rigoureuse du profil par l'équipe pédagogique et entretien personnalisé si nécessaire.", icon: <Users /> },
+            { step: "04", title: "Confirmation Officielle", desc: "Validation de l'admission et accompagnement premium pour une rentrée scolaire en toute sérénité.", icon: <CheckCircle2 /> }
+          ].map((item, i) => (
+            <div key={i} className="relative flex flex-col md:flex-row gap-8 md:gap-16 group">
+              {/* Cercle numéroté */}
+              <div className="w-20 h-20 rounded-full bg-white border-2 border-slate-100 shadow-xl flex-shrink-0 flex items-center justify-center font-serif text-2xl font-bold text-blue-950 z-10 group-hover:border-blue-500 group-hover:text-blue-600 transition-colors">
+                {item.step}
+              </div>
+              
+              {/* Carte de contenu */}
+              <div className="flex-1 bg-white/60 backdrop-blur-xl border border-white p-10 rounded-[2.5rem] shadow-lg shadow-slate-200/30 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-blue-900/10 transition-all duration-500">
+                <div className="text-blue-500 mb-6 bg-blue-50 w-16 h-16 rounded-2xl flex items-center justify-center">
+                  {item.icon}
+                </div>
+                <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">{item.title}</h3>
+                <p className="text-slate-600 font-light leading-relaxed text-lg">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-24 flex flex-col sm:flex-row justify-center gap-6">
+        <button className="px-10 py-5 rounded-full bg-blue-950 text-white font-semibold flex items-center justify-center gap-3 hover:bg-blue-900 transition-all shadow-2xl shadow-blue-900/30 hover:-translate-y-1">
+          Ouvrir un dossier d'admission <ArrowUpRight size={20} />
+        </button>
+        <button className="px-10 py-5 rounded-full bg-white border border-slate-300 text-blue-950 font-semibold flex items-center justify-center gap-3 hover:border-blue-950 transition-all">
+          Contacter les admissions
+        </button>
+      </div>
+    </main>
+  );
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] font-['Plus_Jakarta_Sans',sans-serif] text-slate-800 selection:bg-amber-200 selection:text-blue-950 relative overflow-hidden">
+      
+      {/* IMPORT DES FONTS HAUTE COUTURE */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 8s ease infinite;
+        }
+
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+          33% { transform: translate(40px, -60px) scale(1.1) rotate(5deg); }
+          66% { transform: translate(-30px, 30px) scale(0.9) rotate(-5deg); }
+          100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+        }
+        .animate-blob {
+          animation: blob 20s infinite alternate ease-in-out;
+        }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+      `}} />
+
+      {/* FOND MAGIQUE ET TEXTURÉ */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#F8FAFC]">
+        {/* Lueur Dorée/Champagne */}
+        <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-amber-100/40 blur-[120px] animate-blob" />
+        {/* Lueur Bleu France */}
+        <div className="absolute top-[10%] right-[-20%] w-[50vw] h-[50vw] rounded-full bg-blue-200/30 blur-[120px] animate-blob animation-delay-2000" />
+        {/* Lueur Rouge Subtile */}
+        <div className="absolute bottom-[-20%] left-[10%] w-[70vw] h-[70vw] rounded-full bg-red-100/20 blur-[150px] animate-blob animation-delay-4000" />
+        
+        {/* Texture "Papier d'Art" (Bruit optique ultra léger) */}
+        <div className="absolute inset-0 opacity-[0.25] mix-blend-multiply" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
+      </div>
+
+      {/* NAVBAR FLOTTANTE ULTRA PRESTIGE */}
+      <nav className="fixed w-full z-50 top-6 px-4 sm:px-6 flex justify-center">
+        <div className={`flex items-center justify-between px-6 py-3 rounded-full transition-all duration-700 w-full max-w-6xl ${
+          isScrolled 
+            ? 'bg-white/90 backdrop-blur-2xl border border-white/50 shadow-2xl shadow-blue-900/5' 
+            : 'bg-white/50 backdrop-blur-md border border-white/30 shadow-sm'
+        }`}>
+          <div onClick={() => navigateTo('home')} className="flex items-center gap-4 cursor-pointer group">
+            <div className="w-12 h-12 rounded-full bg-blue-950 flex items-center justify-center text-white font-serif font-bold text-lg tracking-tighter group-hover:rotate-12 group-hover:bg-blue-900 transition-all duration-500 shadow-inner">
+              LF
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif font-bold tracking-tight text-lg text-blue-950 leading-none mb-1 group-hover:text-blue-700 transition-colors">Lycée Français</span>
+              <span className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.2em] leading-none">Kuala Lumpur</span>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex items-center space-x-10 text-sm font-semibold tracking-wide">
+            <button onClick={() => navigateTo('discover')} className={`transition-all ${currentPage === 'discover' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Découvrir</button>
+            <button onClick={() => navigateTo('academic')} className={`transition-all ${currentPage === 'academic' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Académique</button>
+            <button onClick={() => navigateTo('campus')} className={`transition-all ${currentPage === 'campus' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Campus</button>
+            <button onClick={() => navigateTo('admissions')} className={`transition-all ${currentPage === 'admissions' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Admissions</button>
+          </div>
+
+          <button className="hidden lg:flex items-center gap-2 px-7 py-3 rounded-full bg-blue-950 text-white text-sm font-bold hover:bg-blue-900 hover:shadow-lg hover:shadow-blue-900/20 transition-all">
+            Portail <ArrowUpRight size={16} className="text-amber-400" />
+          </button>
+
+          <button className="lg:hidden text-blue-950 p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* MENU MOBILE */}
+      {mobileMenuOpen && (
+        <div className="fixed top-28 left-4 right-4 z-40 bg-white/95 backdrop-blur-3xl border border-white rounded-[2.5rem] p-8 flex flex-col gap-4 shadow-2xl lg:hidden origin-top animate-in fade-in slide-in-from-top-8 duration-500">
+          {['discover', 'academic', 'campus', 'admissions'].map((page) => (
+            <button 
+              key={page}
+              onClick={() => navigateTo(page)} 
+              className={`text-left font-serif text-2xl font-bold p-4 rounded-2xl transition-all ${currentPage === page ? 'bg-blue-50 text-blue-600' : 'text-blue-950 hover:bg-slate-50'}`}
+            >
+              {page === 'discover' ? 'Découvrir' : page === 'academic' ? 'Académique' : page.charAt(0).toUpperCase() + page.slice(1)}
+            </button>
+          ))}
+          <div className="h-px w-full bg-slate-100 my-4" />
+          <button className="flex items-center justify-center gap-3 px-6 py-5 rounded-2xl bg-blue-950 text-white font-bold w-full hover:bg-blue-900 transition-colors shadow-lg">
+            Portail Parents <ArrowUpRight size={20} className="text-amber-400" />
+          </button>
+        </div>
+      )}
+
+      {/* ROUTEUR INTERNE */}
+      <div className="relative z-10">
+        {currentPage === 'home' && renderHome()}
+        {currentPage === 'discover' && renderDiscover()}
+        {currentPage === 'academic' && renderAcademic()}
+        {currentPage === 'campus' && renderCampus()}
+        {currentPage === 'admissions' && renderAdmissions()}
+      </div>
+
+      {/* FOOTER HAUTE COUTURE */}
+      <footer className="bg-blue-950 text-white mt-20 relative z-10 rounded-t-[4rem] overflow-hidden">
+        {/* Filigrane Footer */}
+        <div className="absolute right-[-10%] bottom-[-20%] text-[30rem] font-serif font-black text-white/[0.02] select-none pointer-events-none">
+          LF
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 pt-32 pb-16 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
+            <div className="md:col-span-5">
+              <div onClick={() => navigateTo('home')} className="flex items-center gap-4 cursor-pointer mb-8">
+                <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-blue-950 font-serif font-bold text-xl">LF</div>
+                <div className="flex flex-col">
+                  <span className="font-serif font-bold tracking-tight text-2xl leading-none mb-1">Lycée Français</span>
+                  <span className="text-xs font-bold text-amber-500 uppercase tracking-[0.2em] leading-none">Kuala Lumpur</span>
+                </div>
+              </div>
+              <p className="text-blue-200/70 font-light leading-relaxed max-w-sm text-lg">
+                Forger les esprits brillants de demain dans un environnement d'excellence conventionné par l'AEFE.
+              </p>
+            </div>
+            
+            <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+              <div className="flex flex-col gap-4">
+                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">L'École</h4>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Histoire</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Mot du Proviseur</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Gouvernance</a>
+              </div>
+              <div className="flex flex-col gap-4">
+                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">Liens Rapides</h4>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Admissions</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Frais de scolarité</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Calendrier</a>
+              </div>
+              <div className="flex flex-col gap-4">
+                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">Contact</h4>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Nous écrire</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Plan d'accès</a>
+                <a href="#" className="text-blue-100 hover:text-white transition-colors">Recrutement</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-blue-300/60 text-sm">© 2026 Lycée Français de Kuala Lumpur. Tous droits réservés.</p>
+            <div className="flex gap-6 text-sm text-blue-300/60">
+              <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
+              <a href="#" className="hover:text-white transition-colors">Politique de Confidentialité</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
