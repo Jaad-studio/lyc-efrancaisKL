@@ -1,557 +1,1352 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Menu, X, ArrowUpRight, ChevronRight, Play,
-  Globe2, Sparkles, BookOpen, Users, 
-  MapPin, FileText, CheckCircle2, GraduationCap, 
-  Award, Compass, Library, ArrowRight
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycée Français de Kuala Lumpur | Excellence & Modernité</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-export default function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeCycle, setActiveCycle] = useState(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage]);
-
-  const navigateTo = (page) => {
-    setCurrentPage(page);
-    setMobileMenuOpen(false);
-  };
-
-  const cycles = [
-    {
-      name: "Maternelle",
-      age: "3-5 ans",
-      tagline: "L'éveil par l'exploration.",
-      desc: "Un environnement bilingue bienveillant où chaque enfant construit ses premiers repères.",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200",
-      stats: "Bilinguisme précoce"
-    },
-    {
-      name: "Élémentaire",
-      age: "6-10 ans",
-      tagline: "Les fondations du savoir.",
-      desc: "Acquisition des savoirs fondamentaux et ouverture sur le monde avec la méthode singapourienne.",
-      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1200",
-      stats: "Méthode innovante"
-    },
-    {
-      name: "Collège",
-      age: "11-14 ans",
-      tagline: "Forger l'esprit critique.",
-      desc: "Développement de l'autonomie et préparation rigoureuse au Diplôme National du Brevet.",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
-      stats: "100% réussite au Brevet"
-    },
-    {
-      name: "Lycée",
-      age: "15-18 ans",
-      tagline: "L'excellence globale.",
-      desc: "Un accompagnement personnalisé vers le Baccalauréat et les meilleures universités mondiales.",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200",
-      stats: "85% de mentions"
-    }
-  ];
-
-  const renderHome = () => (
-    <>
-      <main className="relative pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-[90vh] flex flex-col justify-center animate-in fade-in duration-1000 slide-in-from-bottom-8">
-        <div className="relative z-10 flex flex-col items-center text-center mt-12">
-          
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-blue-900/10 bg-white/60 backdrop-blur-xl shadow-lg shadow-blue-900/5 text-sm font-bold text-blue-950 mb-10 hover:scale-105 transition-transform cursor-default">
-            <Sparkles size={16} className="text-amber-500" />
-            Établissement d'Excellence AEFE
-          </div>
-
-          <h1 className="font-serif text-6xl md:text-8xl lg:text-[11rem] font-bold tracking-tight text-blue-950 leading-[0.9] mb-8 relative z-10">
-            Cultiver<br/>
-            <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-blue-600 to-blue-900 animate-gradient inline-block pr-4">
-              l'Excellence.
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-600 max-w-2xl font-light tracking-wide mb-14 leading-relaxed mix-blend-multiply">
-            De la maternelle au baccalauréat, le Lycée Français de Kuala Lumpur forge les esprits brillants de demain dans un écrin multiculturel.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-            <button 
-              onClick={() => navigateTo('admissions')}
-              className="group px-10 py-5 rounded-full bg-blue-950 text-white font-semibold flex items-center justify-center gap-4 transition-all hover:bg-blue-900 hover:shadow-2xl hover:shadow-blue-900/30 overflow-hidden relative"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                Inscriptions 2026 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/0 via-amber-500/20 to-amber-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-            </button>
-            <button className="group px-10 py-5 rounded-full border border-slate-300 hover:border-blue-950 hover:text-blue-950 text-slate-700 bg-white/50 backdrop-blur-md font-semibold flex items-center justify-center gap-4 transition-all">
-              <Play size={20} className="fill-current group-hover:scale-110 transition-transform" /> 
-              Le Film Institutionnel
-            </button>
-          </div>
-        </div>
-
-        {/* METRICS - HAUTE COUTURE CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-40 relative z-10">
-          {[
-            { label: "Réussite au Baccalauréat", value: "100%", icon: <GraduationCap size={40} className="text-amber-500" /> },
-            { label: "Nationalités sur le campus", value: "45+", icon: <Globe2 size={40} className="text-blue-600" /> },
-            { label: "Élèves épanouis", value: "800", icon: <Users size={40} className="text-red-500" /> }
-          ].map((stat, i) => (
-            <div key={i} className="relative p-10 rounded-[2.5rem] bg-white/60 backdrop-blur-2xl border border-white shadow-xl shadow-slate-200/50 group hover:-translate-y-3 transition-all duration-500 overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 group-hover:scale-110 group-hover:rotate-12 transition-all duration-700">
-                {stat.icon}
-              </div>
-              <div className="relative z-10">
-                <p className="font-serif text-6xl font-bold text-blue-950 tracking-tight mb-4">{stat.value}</p>
-                <div className="h-px w-12 bg-amber-500/50 mb-4 group-hover:w-24 transition-all duration-500" />
-                <p className="text-slate-500 text-sm font-bold uppercase tracking-widest">{stat.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* SECTION INTERACTIVE : LE PARCOURS */}
-      <section className="py-40 px-6 max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          
-          <div className="w-full lg:w-5/12 flex flex-col gap-4">
-            <div className="mb-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-px w-8 bg-red-500" />
-                <h2 className="text-sm font-bold text-red-500 tracking-[0.2em] uppercase">Curriculum</h2>
-              </div>
-              <h3 className="font-serif text-5xl md:text-6xl font-bold text-blue-950 tracking-tight leading-tight">
-                Une scolarité<br/><span className="italic text-blue-600">sur-mesure.</span>
-              </h3>
-            </div>
-            
-            <div className="flex flex-col gap-3">
-              {cycles.map((cycle, index) => (
-                <button 
-                  key={index}
-                  onClick={() => setActiveCycle(index)}
-                  className={`group text-left p-6 rounded-[2rem] transition-all duration-500 border ${
-                    activeCycle === index 
-                      ? 'bg-blue-950 border-blue-950 text-white shadow-2xl shadow-blue-950/20 scale-[1.02]' 
-                      : 'bg-white/50 border-white/60 text-slate-500 hover:bg-white hover:border-slate-200 backdrop-blur-md'
-                  }`}
-                >
-                  <div className="flex justify-between items-center mb-1">
-                    <span className={`font-serif text-2xl font-bold ${activeCycle === index ? 'text-white' : 'text-blue-950'}`}>
-                      {cycle.name}
-                    </span>
-                    <ArrowRight size={20} className={`transition-transform duration-300 ${activeCycle === index ? 'text-amber-400 translate-x-1' : 'text-transparent -translate-x-4 group-hover:text-blue-300 group-hover:translate-x-0'}`} />
-                  </div>
-                  <span className={`text-xs font-bold uppercase tracking-widest block ${activeCycle === index ? 'text-blue-300' : 'text-slate-400'}`}>
-                    {cycle.age}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="w-full lg:w-7/12 h-[600px] relative rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl shadow-blue-900/10 group">
-            {cycles.map((cycle, index) => (
-              <div 
-                key={index}
-                className={`absolute inset-0 transition-all duration-1000 ease-in-out ${activeCycle === index ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'}`}
-              >
-                <img 
-                  src={cycle.image} 
-                  alt={cycle.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/20 to-transparent opacity-90" />
-                
-                <div className="absolute bottom-0 left-0 right-0 p-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 backdrop-blur-md text-amber-300 text-sm font-bold border border-amber-500/30 mb-6">
-                    <Sparkles size={16} /> {cycle.stats}
-                  </div>
-                  <h3 className="font-serif text-5xl font-bold text-white mb-4 leading-tight">{cycle.tagline}</h3>
-                  <p className="text-blue-100 text-lg max-w-md font-light leading-relaxed mb-8">{cycle.desc}</p>
-                  
-                  <button onClick={() => navigateTo('academic')} className="inline-flex items-center gap-3 text-white font-bold hover:text-amber-400 transition-colors group/btn">
-                    Découvrir le programme <span className="p-3 rounded-full bg-white/10 group-hover/btn:bg-amber-400 group-hover/btn:text-blue-950 transition-colors"><ArrowUpRight size={20} /></span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
-  );
-
-  const renderDiscover = () => (
-    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
-      
-      {/* 1962 filigrane géant */}
-      <div className="absolute top-20 right-0 text-[20rem] font-serif font-black text-slate-900/[0.03] select-none pointer-events-none z-0">
-        1962
-      </div>
-
-      <div className="relative z-10 max-w-4xl mb-24">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="h-px w-12 bg-amber-500" />
-          <h2 className="text-sm font-bold text-amber-600 tracking-[0.2em] uppercase">Héritage</h2>
-        </div>
-        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-10">
-          L'histoire d'une<br/><span className="italic text-blue-600">vision globale.</span>
-        </h1>
-        <p className="text-2xl text-slate-600 font-light leading-relaxed border-l-4 border-blue-950 pl-8">
-          Depuis plus de 60 ans, le Lycée Français de Kuala Lumpur incarne le trait d'union parfait entre la rigueur académique française et l'ouverture sur l'Asie.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <div className="md:col-span-7 h-[600px] rounded-[3rem] overflow-hidden relative shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=1200" alt="Histoire" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
-          <div className="absolute inset-0 bg-blue-950/20 mix-blend-multiply" />
-        </div>
-        
-        <div className="md:col-span-5 flex flex-col gap-8 md:-ml-16 z-20">
-          <div className="bg-white/90 backdrop-blur-2xl p-12 rounded-[2.5rem] shadow-xl border border-white/50">
-            <Library className="text-blue-600 mb-6" size={40} />
-            <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">Un patrimoine vivant</h3>
-            <p className="text-slate-600 leading-relaxed font-light">
-              Né d'une volonté de rayonnement culturel, notre établissement a su évoluer avec son temps pour devenir une référence éducative incontournable en Asie du Sud-Est.
-            </p>
-          </div>
-          
-          <div className="bg-blue-950 p-12 rounded-[2.5rem] shadow-xl text-white relative overflow-hidden group">
-            <div className="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-150 transition-transform duration-1000">
-              <Globe2 size={200} />
-            </div>
-            <h3 className="font-serif text-3xl font-bold mb-4 relative z-10">Réseau AEFE</h3>
-            <p className="text-blue-100/80 leading-relaxed font-light mb-8 relative z-10">
-              Appartenir au plus grand réseau éducatif mondial, garantissant une continuité scolaire d'excellence dans 138 pays.
-            </p>
-            <button className="text-amber-400 font-bold flex items-center gap-2 hover:gap-4 transition-all relative z-10">
-              Découvrir le réseau <ArrowRight size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-
-  const renderAcademic = () => (
-    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
-      <div className="text-center max-w-4xl mx-auto mb-24">
-        <div className="inline-flex justify-center items-center w-20 h-20 rounded-full bg-amber-100 text-amber-600 mb-8 shadow-inner">
-          <Award size={40} />
-        </div>
-        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-8">
-          Excellence <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Pédagogique.</span>
-        </h1>
-        <p className="text-2xl text-slate-600 font-light leading-relaxed">
-          Un curriculum français d'exigence, sublimé par un bilinguisme précoce et des méthodologies d'enseignement avant-gardistes.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {[
-          { title: "Bilinguisme Intégré", desc: "Immersion totale en français et anglais dès la maternelle. Préparation intensive aux certifications Cambridge (IELTS).", icon: <Globe2 size={48} />, img: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=800" },
-          { title: "Sciences & Avenir", desc: "Laboratoires de pointe, initiation au code, robotique et approche expérimentale renforcée pour former les innovateurs.", icon: <Compass size={48} />, img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800" },
-          { title: "Humanités & Arts", desc: "Épanouissement par la culture : théâtre, arts plastiques, musique et développement poussé du sens critique.", icon: <BookOpen size={48} />, img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" }
-        ].map((item, i) => (
-          <div key={i} className="group rounded-[3rem] bg-white border border-white/60 shadow-xl shadow-slate-200/50 overflow-hidden hover:-translate-y-4 transition-all duration-500">
-            <div className="h-64 overflow-hidden relative">
-              <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-              <div className="absolute inset-0 bg-blue-950/40 mix-blend-multiply" />
-              <div className="absolute bottom-[-24px] right-8 w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-xl rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                {item.icon}
-              </div>
-            </div>
-            <div className="p-10 pt-12">
-              <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">{item.title}</h3>
-              <p className="text-slate-600 font-light leading-relaxed">{item.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </main>
-  );
-
-  const renderCampus = () => (
-    <main className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
-       <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px w-12 bg-blue-600" />
-            <h2 className="text-sm font-bold text-blue-600 tracking-[0.2em] uppercase">Notre Écrin</h2>
-          </div>
-          <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1]">
-            Un campus pensé<br/><span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-amber-500">pour grandir.</span>
-          </h1>
-        </div>
-        <button className="hidden md:flex items-center gap-3 px-8 py-4 rounded-full bg-white border border-slate-200 text-blue-950 font-bold hover:bg-slate-50 transition-colors shadow-sm">
-          <MapPin size={20} className="text-red-500" /> Venir nous voir
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        {/* Grande image Cinematic */}
-        <div className="md:col-span-12 h-[600px] rounded-[3rem] overflow-hidden relative shadow-2xl group">
-           <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=2000" alt="Campus" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-           <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/20 to-transparent opacity-80" />
-           
-           <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-8">
-              <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-bold border border-white/30 mb-4">
-                  <Sparkles size={16} className="text-amber-400" /> Infrastructures Premium
-                </div>
-                <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Complexe Sportif</h3>
-                <p className="text-blue-100 text-lg font-light leading-relaxed">Piscine semi-olympique, mur d'escalade professionnel, terrains multisports et gymnase climatisé dernière génération.</p>
-              </div>
-           </div>
-        </div>
-
-        {/* Cartes inférieures */}
-        <div className="md:col-span-5 h-[400px] rounded-[3rem] bg-white border border-slate-200 shadow-xl shadow-slate-200/40 p-12 flex flex-col justify-center relative overflow-hidden group">
-           <div className="absolute right-[-20%] top-[-20%] w-64 h-64 bg-amber-50 rounded-full blur-3xl opacity-50 group-hover:bg-amber-100 transition-colors" />
-           <MapPin size={48} className="text-amber-500 mb-8 relative z-10" />
-           <h3 className="font-serif text-4xl font-bold text-blue-950 mb-4 relative z-10">Oasis Urbaine</h3>
-           <p className="text-slate-600 text-lg font-light leading-relaxed relative z-10">Niché à Segambut, à quelques minutes du cœur vibrant de Kuala Lumpur, dans un environnement verdoyant et hautement sécurisé.</p>
-        </div>
-
-        <div className="md:col-span-7 h-[400px] rounded-[3rem] bg-blue-950 text-white shadow-xl shadow-blue-900/30 p-12 flex flex-col justify-center relative overflow-hidden group">
-           <div className="absolute right-0 top-0 w-full h-full opacity-20 bg-[url('https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center mix-blend-overlay group-hover:scale-110 transition-transform duration-1000" />
-           <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-950/90 to-transparent" />
-           
-           <div className="relative z-10 max-w-lg">
-             <Library size={48} className="text-blue-400 mb-8" />
-             <h3 className="font-serif text-4xl font-bold mb-4">Espaces de Savoir</h3>
-             <p className="text-blue-100/80 text-lg font-light leading-relaxed">Un CDI immersif, une restauration pensée par un chef français, et des zones de créativité conçues pour le bien-être des élèves.</p>
-           </div>
-        </div>
-      </div>
-    </main>
-  );
-
-  const renderAdmissions = () => (
-    <main className="relative pt-40 pb-32 px-6 max-w-4xl mx-auto min-h-screen animate-in fade-in duration-1000 z-10">
-      <div className="text-center mb-24">
-        <h2 className="text-sm font-bold text-red-600 tracking-[0.2em] uppercase mb-6">Processus 2026-2027</h2>
-        <h1 className="font-serif text-6xl md:text-8xl font-bold text-blue-950 tracking-tight leading-[1.1] mb-8">
-          Rejoindre <br/><span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">l'Élite.</span>
-        </h1>
-        <p className="text-2xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
-          Les portes de l'excellence vous sont ouvertes. Découvrez notre processus d'admission simplifié et exclusif.
-        </p>
-      </div>
-
-      <div className="relative">
-        {/* Ligne directrice (Timeline) */}
-        <div className="absolute left-[39px] top-10 bottom-10 w-px bg-gradient-to-b from-blue-200 via-blue-200 to-transparent hidden md:block" />
-
-        <div className="space-y-12">
-          {[
-            { step: "01", title: "Découverte & Rencontre", desc: "Participez à une visite privée du campus avec notre équipe de direction pour projeter l'avenir de votre enfant.", icon: <Compass /> },
-            { step: "02", title: "Dossier Numérique", desc: "Soumission de votre dossier scolaire et administratif via notre portail sécurisé hautement confidentiel.", icon: <FileText /> },
-            { step: "03", title: "Commission d'Étude", desc: "Analyse rigoureuse du profil par l'équipe pédagogique et entretien personnalisé si nécessaire.", icon: <Users /> },
-            { step: "04", title: "Confirmation Officielle", desc: "Validation de l'admission et accompagnement premium pour une rentrée scolaire en toute sérénité.", icon: <CheckCircle2 /> }
-          ].map((item, i) => (
-            <div key={i} className="relative flex flex-col md:flex-row gap-8 md:gap-16 group">
-              {/* Cercle numéroté */}
-              <div className="w-20 h-20 rounded-full bg-white border-2 border-slate-100 shadow-xl flex-shrink-0 flex items-center justify-center font-serif text-2xl font-bold text-blue-950 z-10 group-hover:border-blue-500 group-hover:text-blue-600 transition-colors">
-                {item.step}
-              </div>
-              
-              {/* Carte de contenu */}
-              <div className="flex-1 bg-white/60 backdrop-blur-xl border border-white p-10 rounded-[2.5rem] shadow-lg shadow-slate-200/30 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-blue-900/10 transition-all duration-500">
-                <div className="text-blue-500 mb-6 bg-blue-50 w-16 h-16 rounded-2xl flex items-center justify-center">
-                  {item.icon}
-                </div>
-                <h3 className="font-serif text-3xl font-bold text-blue-950 mb-4">{item.title}</h3>
-                <p className="text-slate-600 font-light leading-relaxed text-lg">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-24 flex flex-col sm:flex-row justify-center gap-6">
-        <button className="px-10 py-5 rounded-full bg-blue-950 text-white font-semibold flex items-center justify-center gap-3 hover:bg-blue-900 transition-all shadow-2xl shadow-blue-900/30 hover:-translate-y-1">
-          Ouvrir un dossier d'admission <ArrowUpRight size={20} />
-        </button>
-        <button className="px-10 py-5 rounded-full bg-white border border-slate-300 text-blue-950 font-semibold flex items-center justify-center gap-3 hover:border-blue-950 transition-all">
-          Contacter les admissions
-        </button>
-      </div>
-    </main>
-  );
-
-  return (
-    <div className="min-h-screen bg-[#F8FAFC] font-['Plus_Jakarta_Sans',sans-serif] text-slate-800 selection:bg-amber-200 selection:text-blue-950 relative overflow-hidden">
-      
-      {/* IMPORT DES FONTS HAUTE COUTURE */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-        
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'lfkl-blue': '#0A192F',
+                        'lfkl-deep': '#050B14',
+                        'lfkl-gold': '#D4AF37',
+                        'lfkl-gold-light': '#F3E5AB',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
         }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 8s ease infinite;
+    </script>
+
+    <!-- CSS Personnalisé -->
+    <style>
+        /* Base & Scrollbar */
+        body { background-color: #050B14; color: #F5F5F7; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050B14; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+
+        /* Starfield Background */
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; overflow: hidden; }
+        .star {
+            position: absolute; background: white; border-radius: 50%;
+            box-shadow: 0 0 10px #D4AF37, 0 0 20px #D4AF37;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.8; transform: translateY(80vh) scale(1); }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(0); opacity: 0; }
         }
 
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-          33% { transform: translate(40px, -60px) scale(1.1) rotate(5deg); }
-          66% { transform: translate(-30px, 30px) scale(0.9) rotate(-5deg); }
-          100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+        /* Glassmorphism Premium */
+        .glass {
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
-        .animate-blob {
-          animation: blob 20s infinite alternate ease-in-out;
+        
+        .glass-card {
+            background: rgba(16, 33, 62, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-      `}} />
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px 0 rgba(212, 175, 55, 0.1);
+        }
 
-      {/* FOND MAGIQUE ET TEXTURÉ */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#F8FAFC]">
-        {/* Lueur Dorée/Champagne */}
-        <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-amber-100/40 blur-[120px] animate-blob" />
-        {/* Lueur Bleu France */}
-        <div className="absolute top-[10%] right-[-20%] w-[50vw] h-[50vw] rounded-full bg-blue-200/30 blur-[120px] animate-blob animation-delay-2000" />
-        {/* Lueur Rouge Subtile */}
-        <div className="absolute bottom-[-20%] left-[10%] w-[70vw] h-[70vw] rounded-full bg-red-100/20 blur-[150px] animate-blob animation-delay-4000" />
+        /* WebGL Canvas */
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        #campus-canvas-container { width: 100%; height: 60vh; position: relative; border-radius: 24px; overflow: hidden; background: radial-gradient(circle at center, #0a192f 0%, #020c1b 100%); cursor: grab;}
+        #campus-canvas-container:active { cursor: grabbing; }
+
+        /* Loader */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #050B14; z-index: 9999; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; color: white;
+        }
+        .svg-logo path {
+            stroke: #D4AF37; stroke-width: 2; fill: none;
+            stroke-dasharray: 1000; stroke-dashoffset: 1000;
+            animation: dash 2s ease-in-out forwards;
+        }
+        @keyframes dash { to { stroke-dashoffset: 0; fill: rgba(212, 175, 55, 0.2); } }
+
+        /* Masonry Grid */
+        .masonry-grid { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { display: inline-block; width: 100%; break-inside: avoid; margin-bottom: 1rem; position: relative; overflow: hidden; border-radius: 16px; transition: transform 0.4s ease, opacity 0.4s ease; }
+
+        /* Utilities */
+        .text-gradient { background: linear-gradient(90deg, #D4AF37, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        {/* Texture "Papier d'Art" (Bruit optique ultra léger) */}
-        <div className="absolute inset-0 opacity-[0.25] mix-blend-multiply" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }} />
-      </div>
-
-      {/* NAVBAR FLOTTANTE ULTRA PRESTIGE */}
-      <nav className="fixed w-full z-50 top-6 px-4 sm:px-6 flex justify-center">
-        <div className={`flex items-center justify-between px-6 py-3 rounded-full transition-all duration-700 w-full max-w-6xl ${
-          isScrolled 
-            ? 'bg-white/90 backdrop-blur-2xl border border-white/50 shadow-2xl shadow-blue-900/5' 
-            : 'bg-white/50 backdrop-blur-md border border-white/30 shadow-sm'
-        }`}>
-          <div onClick={() => navigateTo('home')} className="flex items-center gap-4 cursor-pointer group">
-            <div className="w-12 h-12 rounded-full bg-blue-950 flex items-center justify-center text-white font-serif font-bold text-lg tracking-tighter group-hover:rotate-12 group-hover:bg-blue-900 transition-all duration-500 shadow-inner">
-              LF
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold tracking-tight text-lg text-blue-950 leading-none mb-1 group-hover:text-blue-700 transition-colors">Lycée Français</span>
-              <span className="text-[10px] font-bold text-amber-600 uppercase tracking-[0.2em] leading-none">Kuala Lumpur</span>
-            </div>
-          </div>
-
-          <div className="hidden lg:flex items-center space-x-10 text-sm font-semibold tracking-wide">
-            <button onClick={() => navigateTo('discover')} className={`transition-all ${currentPage === 'discover' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Découvrir</button>
-            <button onClick={() => navigateTo('academic')} className={`transition-all ${currentPage === 'academic' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Académique</button>
-            <button onClick={() => navigateTo('campus')} className={`transition-all ${currentPage === 'campus' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Campus</button>
-            <button onClick={() => navigateTo('admissions')} className={`transition-all ${currentPage === 'admissions' ? 'text-blue-600 font-bold' : 'text-slate-600 hover:text-blue-950 hover:-translate-y-0.5'}`}>Admissions</button>
-          </div>
-
-          <button className="hidden lg:flex items-center gap-2 px-7 py-3 rounded-full bg-blue-950 text-white text-sm font-bold hover:bg-blue-900 hover:shadow-lg hover:shadow-blue-900/20 transition-all">
-            Portail <ArrowUpRight size={16} className="text-amber-400" />
-          </button>
-
-          <button className="lg:hidden text-blue-950 p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* MENU MOBILE */}
-      {mobileMenuOpen && (
-        <div className="fixed top-28 left-4 right-4 z-40 bg-white/95 backdrop-blur-3xl border border-white rounded-[2.5rem] p-8 flex flex-col gap-4 shadow-2xl lg:hidden origin-top animate-in fade-in slide-in-from-top-8 duration-500">
-          {['discover', 'academic', 'campus', 'admissions'].map((page) => (
-            <button 
-              key={page}
-              onClick={() => navigateTo(page)} 
-              className={`text-left font-serif text-2xl font-bold p-4 rounded-2xl transition-all ${currentPage === page ? 'bg-blue-50 text-blue-600' : 'text-blue-950 hover:bg-slate-50'}`}
-            >
-              {page === 'discover' ? 'Découvrir' : page === 'academic' ? 'Académique' : page.charAt(0).toUpperCase() + page.slice(1)}
-            </button>
-          ))}
-          <div className="h-px w-full bg-slate-100 my-4" />
-          <button className="flex items-center justify-center gap-3 px-6 py-5 rounded-2xl bg-blue-950 text-white font-bold w-full hover:bg-blue-900 transition-colors shadow-lg">
-            Portail Parents <ArrowUpRight size={20} className="text-amber-400" />
-          </button>
-        </div>
-      )}
-
-      {/* ROUTEUR INTERNE */}
-      <div className="relative z-10">
-        {currentPage === 'home' && renderHome()}
-        {currentPage === 'discover' && renderDiscover()}
-        {currentPage === 'academic' && renderAcademic()}
-        {currentPage === 'campus' && renderCampus()}
-        {currentPage === 'admissions' && renderAdmissions()}
-      </div>
-
-      {/* FOOTER HAUTE COUTURE */}
-      <footer className="bg-blue-950 text-white mt-20 relative z-10 rounded-t-[4rem] overflow-hidden">
-        {/* Filigrane Footer */}
-        <div className="absolute right-[-10%] bottom-[-20%] text-[30rem] font-serif font-black text-white/[0.02] select-none pointer-events-none">
-          LF
-        </div>
+        /* Custom Buttons */
+        .btn-premium {
+            position: relative; overflow: hidden; transition: all 0.3s ease;
+            background: linear-gradient(135deg, #D4AF37, #B89020); color: #0A192F; font-weight: 700; padding: 0.75rem 2rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            cursor: pointer; border: none; outline: none; text-decoration: none; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-premium::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-20deg); transition: all 0.5s ease;
+        }
+        .btn-premium:hover::after { left: 150%; }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
         
-        <div className="max-w-7xl mx-auto px-6 pt-32 pb-16 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
-            <div className="md:col-span-5">
-              <div onClick={() => navigateTo('home')} className="flex items-center gap-4 cursor-pointer mb-8">
-                <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-blue-950 font-serif font-bold text-xl">LF</div>
-                <div className="flex flex-col">
-                  <span className="font-serif font-bold tracking-tight text-2xl leading-none mb-1">Lycée Français</span>
-                  <span className="text-xs font-bold text-amber-500 uppercase tracking-[0.2em] leading-none">Kuala Lumpur</span>
-                </div>
-              </div>
-              <p className="text-blue-200/70 font-light leading-relaxed max-w-sm text-lg">
-                Forger les esprits brillants de demain dans un environnement d'excellence conventionné par l'AEFE.
-              </p>
-            </div>
-            
-            <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
-              <div className="flex flex-col gap-4">
-                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">L'École</h4>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Histoire</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Mot du Proviseur</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Gouvernance</a>
-              </div>
-              <div className="flex flex-col gap-4">
-                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">Liens Rapides</h4>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Admissions</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Frais de scolarité</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Calendrier</a>
-              </div>
-              <div className="flex flex-col gap-4">
-                <h4 className="font-bold uppercase tracking-widest text-amber-500 mb-2">Contact</h4>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Nous écrire</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Plan d'accès</a>
-                <a href="#" className="text-blue-100 hover:text-white transition-colors">Recrutement</a>
-              </div>
-            </div>
-          </div>
+        .btn-outline {
+            border: 1px solid #D4AF37; color: #D4AF37; font-weight: 600; padding: 0.75rem 2rem; border-radius: 999px;
+            transition: all 0.3s ease; backdrop-filter: blur(5px); display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            cursor: pointer; text-decoration: none; background: rgba(212, 175, 55, 0.05);
+        }
+        .btn-outline:hover { background: rgba(212, 175, 55, 0.2); transform: translateY(-2px); }
+        
+        /* SPA Transitions */
+        .hidden-view { display: none !important; }
+        .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); } 
+            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
+        }
 
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-blue-300/60 text-sm">© 2026 Lycée Français de Kuala Lumpur. Tous droits réservés.</p>
-            <div className="flex gap-6 text-sm text-blue-300/60">
-              <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
-              <a href="#" className="hover:text-white transition-colors">Politique de Confidentialité</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+        /* Nav active link */
+        .nav-link { position: relative; padding: 0.5rem 0; }
+        .nav-link.active { color: #D4AF37; font-weight: 700; }
+        .nav-link::after { content:''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: #D4AF37; border-radius: 2px; transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
+        /* Floating Nav Animation */
+        .nav-scrolled { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; background: rgba(10, 25, 47, 0.85) !important; width: 90% !important; max-width: 1000px !important; }
+
+        /* Timeline Admissions Premium (Optimisée Mobile) */
+        .timeline-line {
+            position: absolute; top: 32px; left: 10%; right: 10%; height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+            z-index: 0;
+        }
+        @media (max-width: 768px) {
+            .timeline-line { 
+                top: 0; bottom: 0; left: 50%; width: 3px; height: 100%; right: auto; 
+                transform: translateX(-50%); 
+                background: linear-gradient(180deg, transparent, rgba(212,175,55,0.5), transparent); 
+            }
+        }
+
+        /* Interactive Pedagogie Layout */
+        .pedagogie-menu-item { opacity: 0.6; transition: all 0.4s ease; border: 1px solid transparent; }
+        .pedagogie-menu-item:hover { opacity: 0.8; background: rgba(255,255,255,0.05); }
+        .pedagogie-menu-item.active { opacity: 1; border-color: rgba(212, 175, 55, 0.4); background: rgba(212, 175, 55, 0.1); transform: translateX(10px); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1); }
+        .pedagogie-content-pane { display: none; animation: fadeIn 0.6s ease forwards; }
+        .pedagogie-content-pane.active { display: block; }
+        
+        /* Halos lumineux */
+        .glow-bg { position: absolute; border-radius: 50%; filter: blur(80px); z-index: -1; pointer-events: none; opacity: 0.3; }
+
+        /* Fix pour éviter le flash et la double animation du titre Hero */
+        .gs-hero-anim { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="antialiased selection:bg-lfkl-gold selection:text-lfkl-blue">
+
+    <!-- FOND ÉTOILÉ GLOBAL -->
+    <div id="starfield"></div>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <svg class="svg-logo w-24 h-24 mb-6" viewBox="0 0 100 100">
+            <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" />
+            <path d="M30 40 L50 60 L70 40" />
+            <path d="M50 20 L50 60" />
+        </svg>
+        <div class="font-serif text-2xl tracking-widest text-lfkl-gold">LFKL</div>
+        <div class="mt-2 text-sm uppercase tracking-widest text-gray-400 animate-pulse">Initialisation de l'excellence...</div>
     </div>
-  );
-}
+
+    <!-- NAVIGATION FLOTTANTE (PILL SHAPE) -->
+    <div class="fixed top-6 left-0 w-full flex justify-center z-50 px-4 pointer-events-none">
+        <nav class="glass rounded-full w-[95%] max-w-7xl transition-all duration-500 pointer-events-auto flex justify-between items-center px-6 py-4" id="navbar">
+            <!-- Logo -->
+            <a href="#" onclick="navigate('home'); return false;" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 border-2 border-lfkl-gold rounded-full flex items-center justify-center group-hover:bg-lfkl-gold transition-colors duration-500 shadow-[0_0_10px_rgba(212,175,55,0.3)]">
+                    <span class="font-serif text-lfkl-gold group-hover:text-lfkl-blue font-bold transition-colors duration-500">L</span>
+                </div>
+                <span class="font-serif text-xl font-semibold tracking-wide hidden lg:block text-white">LFKL</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium text-sm text-gray-300">
+                <a href="#" onclick="navigate('etablissement'); return false;" class="nav-link hover:text-white transition-colors" data-target="etablissement" data-i18n="nav-ecole">École</a>
+                <a href="#" onclick="navigate('pedagogie'); return false;" class="nav-link hover:text-white transition-colors" data-target="pedagogie" data-i18n="nav-edu">Éducation</a>
+                <a href="#" onclick="navigate('viescolaire'); return false;" class="nav-link hover:text-white transition-colors" data-target="viescolaire" data-i18n="nav-vie">Vie Scolaire</a>
+                <a href="#" onclick="navigate('admissions'); return false;" class="nav-link hover:text-white transition-colors" data-target="admissions" data-i18n="nav-adm">Admission</a>
+                <a href="#" onclick="navigate('professionnel'); return false;" class="nav-link hover:text-white transition-colors" data-target="professionnel" data-i18n="nav-pro">Professionnelle</a>
+            </div>
+
+            <!-- Actions Desktop & Tablet -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <div class="flex gap-2 text-xs font-bold">
+                    <span class="lang-fr cursor-pointer text-lfkl-gold transition-colors">FR</span>
+                    <span class="lang-en cursor-pointer text-gray-400 hover:text-white transition-colors">EN</span>
+                </div>
+                <button onclick="navigate('admissions')" class="btn-premium text-sm py-2 px-5 shadow-[0_0_15px_rgba(212,175,55,0.4)]" data-i18n="nav-insc">Inscription</button>
+            </div>
+
+            <!-- Bouton Menu Mobile (Hamburger) -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-lfkl-gold transition-colors p-2">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- OVERLAY MENU MOBILE -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#050B14]/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center space-y-8 pointer-events-none opacity-0">
+        <a href="#" onclick="navigate('etablissement'); toggleMobileMenu(); return false;" class="text-2xl font-serif text-white hover:text-lfkl-gold transition-colors" data-i18n="nav-ecole">École</a>
+        <a href="#" onclick="navigate('pedagogie'); toggleMobileMenu(); return false;" class="text-2xl font-serif text-white hover:text-lfkl-gold transition-colors" data-i18n="nav-edu">Éducation</a>
+        <a href="#" onclick="navigate('viescolaire'); toggleMobileMenu(); return false;" class="text-2xl font-serif text-white hover:text-lfkl-gold transition-colors" data-i18n="nav-vie">Vie Scolaire</a>
+        <a href="#" onclick="navigate('admissions'); toggleMobileMenu(); return false;" class="text-2xl font-serif text-white hover:text-lfkl-gold transition-colors" data-i18n="nav-adm">Admission</a>
+        <a href="#" onclick="navigate('professionnel'); toggleMobileMenu(); return false;" class="text-2xl font-serif text-white hover:text-lfkl-gold transition-colors" data-i18n="nav-pro">Professionnelle</a>
+        
+        <div class="flex gap-6 mt-8 border-t border-white/10 pt-8">
+             <span class="lang-fr cursor-pointer text-lfkl-gold font-bold text-lg">FR</span>
+             <span class="lang-en cursor-pointer text-gray-400 font-bold text-lg">EN</span>
+        </div>
+        <button onclick="navigate('admissions'); toggleMobileMenu();" class="btn-premium mt-4 text-lg px-8 py-3" data-i18n="nav-insc">Inscription</button>
+    </div>
+
+    <!-- === CONTENEUR SPA === -->
+    <main id="app-container">
+
+        <!-- ============================================== -->
+        <!-- VUE 1 : ACCUEIL                                -->
+        <!-- ============================================== -->
+        <div id="view-home" class="view-section">
+            
+            <!-- HERO -->
+            <header id="hero" class="relative w-full h-screen flex items-center justify-center overflow-hidden">
+                <canvas id="hero-canvas"></canvas>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#050B14]"></div>
+                
+                <div class="relative z-10 text-center px-4 max-w-5xl mx-auto hero-content mt-16">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 rounded-full border border-lfkl-gold/30 bg-lfkl-gold/10 backdrop-blur-md mb-8 gs-hero-anim shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                        <span class="w-2 h-2 rounded-full bg-lfkl-gold animate-pulse"></span>
+                        <span class="text-lfkl-gold text-[10px] md:text-xs font-bold tracking-widest uppercase" data-i18n="hero-badge">Kuala Lumpur, Malaisie</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-tight mb-6 gs-hero-anim" data-i18n="hero-title">
+                        Excellence.<br>
+                        <span class="text-gradient italic font-light">Ouverture.</span> Réussite.
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg md:text-xl text-gray-400 font-light max-w-2xl mx-auto mb-10 gs-hero-anim px-2" data-i18n="hero-p">
+                        Un enseignement d'excellence française dans un environnement profondément multiculturel et technologiquement avancé.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 gs-hero-anim w-full px-6 md:px-0">
+                        <button onclick="document.getElementById('campus').scrollIntoView({behavior: 'smooth'})" class="btn-premium w-full sm:w-auto text-center py-3 md:py-4 px-6 md:px-8 text-base md:text-lg" data-i18n="hero-btn-camp">Découvrir le campus</button>
+                        <button onclick="navigate('admissions')" class="btn-outline w-full sm:w-auto text-center py-3 md:py-4 px-6 md:px-8 text-base md:text-lg" data-i18n="hero-btn-adm">
+                            Admission <i class="ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce text-gray-500">
+                    <span class="text-[10px] uppercase tracking-widest mb-2 font-bold" data-i18n="hero-scroll">Explorer</span>
+                    <i class="ph ph-mouse-simple text-2xl"></i>
+                </div>
+            </header>
+
+            <!-- L'ÉCOLE EN 3D -->
+            <section id="campus" class="py-20 md:py-32 px-4 md:px-6 relative z-10">
+                <div class="glow-bg w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-600/20 top-0 left-0"></div>
+                
+                <div class="max-w-7xl mx-auto relative">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gs-reveal">
+                        <div>
+                            <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 font-semibold">Infrastructures</h2>
+                            <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-white">Le Campus <span class="italic text-gray-500">du futur</span></h3>
+                        </div>
+                        <p class="max-w-md text-sm md:text-base text-gray-400 mt-4 md:mt-0">
+                            Naviguez dans notre maquette 3D interactive pour découvrir nos installations de pointe conçues pour l'épanouissement.
+                        </p>
+                    </div>
+
+                    <div class="relative glass-card rounded-2xl md:rounded-3xl p-1 md:p-2 gs-reveal border border-white/10">
+                        <div class="absolute top-4 left-4 md:top-6 md:left-6 z-10 glass px-3 py-2 md:px-4 md:py-2 rounded-full flex items-center gap-2 text-xs md:text-sm font-medium text-white">
+                            <i class="ph ph-arrows-out-cardinal text-lfkl-gold text-lg animate-pulse"></i> <span class="hidden sm:inline">Cliquez et glissez pour explorer</span><span class="sm:hidden">Explorer</span>
+                        </div>
+                        
+                        <div id="campus-tooltip" class="absolute z-20 pointer-events-none opacity-0 transition-opacity duration-300 glass px-4 py-3 md:px-5 md:py-4 rounded-xl min-w-[180px] md:min-w-[220px] border border-lfkl-gold/30" style="transform: translate(-50%, -120%);">
+                            <h4 id="tooltip-title" class="font-serif font-bold text-base md:text-lg text-lfkl-gold">Bâtiment</h4>
+                            <p id="tooltip-desc" class="text-[10px] md:text-xs mt-1 md:mt-2 text-gray-300 leading-relaxed">Description...</p>
+                        </div>
+                        
+                        <div id="campus-canvas-container" class="rounded-xl md:rounded-[20px] h-[50vh] md:h-[60vh]"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROGRAMMES & PÉDAGOGIES (ACCUEIL) -->
+            <section id="pedagogie-summary" class="py-20 md:py-32 relative">
+                <div class="glow-bg w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-lfkl-gold/10 top-1/2 right-0 transform -translate-y-1/2"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 md:px-6 mb-12 md:mb-16 gs-reveal text-center">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 md:mb-3 font-bold flex items-center justify-center gap-2">
+                        <i class="ph ph-sparkle"></i> Cursus d'Excellence
+                    </h2>
+                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-white">Un parcours sur-mesure</h3>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row gap-8 md:gap-12 gs-reveal">
+                    <!-- Menu vertical interactif -->
+                    <div class="lg:w-1/3 flex flex-col justify-center space-y-3 md:space-y-4">
+                        <button class="pedagogie-menu-item active text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-maternelle">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center text-lfkl-gold group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-colors"><i class="ph ph-baby text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-white">Maternelle</div>
+                                    <div class="text-[10px] md:text-xs text-gray-400 mt-1 uppercase tracking-wider">TPS à GS</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-primaire">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center text-lfkl-gold group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-colors"><i class="ph ph-backpack text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-white">Primaire</div>
+                                    <div class="text-[10px] md:text-xs text-gray-400 mt-1 uppercase tracking-wider">CP au CM2</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-college">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center text-lfkl-gold group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-colors"><i class="ph ph-books text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-white">Collège</div>
+                                    <div class="text-[10px] md:text-xs text-gray-400 mt-1 uppercase tracking-wider">6ème à 3ème</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-lycee">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center text-lfkl-gold group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-colors"><i class="ph ph-graduation-cap text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-white">Lycée</div>
+                                    <div class="text-[10px] md:text-xs text-gray-400 mt-1 uppercase tracking-wider">2nde à Terminale</div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- Contenu dynamique -->
+                    <div class="lg:w-2/3 glass-card p-2 rounded-2xl md:rounded-3xl relative h-[400px] md:h-[500px] lg:h-[600px] border border-lfkl-gold/20 shadow-[0_0_30px_rgba(212,175,55,0.05)]">
+                        <div id="pane-maternelle" class="pedagogie-content-pane active h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Maternelle">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-lfkl-gold/20 text-lfkl-gold border border-lfkl-gold/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Bilinguisme</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">L'éveil par le jeu</h4>
+                                <p class="text-xs md:text-base text-gray-300 mb-6 md:mb-8 max-w-lg leading-relaxed">Apprendre dans un environnement stimulant et bienveillant. Initiation à l'anglais et immersion douce pour développer la confiance en soi.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-primaire" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Primaire">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-lfkl-gold/20 text-lfkl-gold border border-lfkl-gold/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Fondamentaux</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Des bases solides</h4>
+                                <p class="text-xs md:text-base text-gray-300 mb-6 md:mb-8 max-w-lg leading-relaxed">Acquisition de l'esprit critique, projets collaboratifs interdisciplinaires et utilisation d'outils numériques innovants pour une citoyenneté active.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-college" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Collège">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-lfkl-gold/20 text-lfkl-gold border border-lfkl-gold/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Autonomie</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Préparation & Certifications</h4>
+                                <p class="text-xs md:text-base text-gray-300 mb-6 md:mb-8 max-w-lg leading-relaxed">Un accompagnement personnalisé vers le Brevet. Laboratoires connectés, certifications Cambridge et méthodes de travail efficaces.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-lycee" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Lycée">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-lfkl-gold/20 text-lfkl-gold border border-lfkl-gold/30 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">BFI & Excellence</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Passeport pour l'avenir</h4>
+                                <p class="text-xs md:text-base text-gray-300 mb-6 md:mb-8 max-w-lg leading-relaxed">100% de réussite au Bac. Préparation intensive pour l'enseignement supérieur mondial et orientation sur-mesure pour intégrer les meilleures universités.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6">Découvrir le programme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROCESSUS D'ADMISSION (TIMELINE) -->
+            <section id="admissions-mini" class="py-20 md:py-32 relative">
+                <div class="glow-bg w-[300px] md:w-[800px] h-[300px] md:h-[300px] bg-blue-500/10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                
+                <div class="max-w-6xl mx-auto gs-reveal relative z-10 px-4">
+                    <div class="text-center mb-16 md:mb-20">
+                        <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 md:mb-3 font-bold">Nous rejoindre</h2>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-white">Processus d'Admission</h3>
+                    </div>
+
+                    <div class="relative w-full mb-12 md:mb-16">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="flex flex-col md:flex-row justify-between relative z-10 gap-10 md:gap-4">
+                            <div class="flex-1 text-center relative group">
+                                <div class="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-[#050B14] border-2 border-lfkl-gold text-lfkl-gold flex items-center justify-center text-xl md:text-2xl shadow-[0_0_15px_rgba(212,175,55,0.3)] group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-all duration-300 mb-4 md:mb-6 z-10 relative">
+                                    <i class="ph ph-cursor-click"></i>
+                                </div>
+                                <div class="glass-card p-5 md:p-6 rounded-2xl h-full border border-white/5 group-hover:-translate-y-1 md:group-hover:-translate-y-2 transition-transform duration-300">
+                                    <div class="text-lfkl-gold font-bold text-[10px] md:text-sm mb-1 uppercase tracking-wider">Étape 01</div>
+                                    <h4 class="font-bold text-white text-base md:text-lg mb-2">Demande & Infos</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">Prise de contact en ligne, visite du campus ou portes ouvertes.</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center relative group">
+                                <div class="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-[#050B14] border-2 border-lfkl-gold text-lfkl-gold flex items-center justify-center text-xl md:text-2xl shadow-[0_0_15px_rgba(212,175,55,0.3)] group-hover:bg-lfkl-gold group-hover:text-lfkl-deep transition-all duration-300 mb-4 md:mb-6 z-10 relative">
+                                    <i class="ph ph-folder-open"></i>
+                                </div>
+                                <div class="glass-card p-5 md:p-6 rounded-2xl h-full border border-white/5 group-hover:-translate-y-1 md:group-hover:-translate-y-2 transition-transform duration-300">
+                                    <div class="text-lfkl-gold font-bold text-[10px] md:text-sm mb-1 uppercase tracking-wider">Étape 02</div>
+                                    <h4 class="font-bold text-white text-base md:text-lg mb-2">Dossier Eduka</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">Création du compte et soumission sécurisée des pièces scolaires.</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center relative group">
+                                <div class="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-[#050B14] border-2 border-white/20 text-gray-400 flex items-center justify-center text-xl md:text-2xl group-hover:border-lfkl-gold group-hover:text-lfkl-gold transition-all duration-300 mb-4 md:mb-6 z-10 relative">
+                                    <i class="ph ph-users-three"></i>
+                                </div>
+                                <div class="glass-card p-5 md:p-6 rounded-2xl h-full border border-white/5 group-hover:-translate-y-1 md:group-hover:-translate-y-2 transition-transform duration-300 opacity-90 md:opacity-80 group-hover:opacity-100">
+                                    <div class="text-gray-400 md:text-gray-500 font-bold text-[10px] md:text-sm mb-1 uppercase tracking-wider group-hover:text-lfkl-gold transition-colors">Étape 03</div>
+                                    <h4 class="font-bold text-white text-base md:text-lg mb-2">Entretien</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">Échange pédagogique avec la direction pour évaluer les besoins.</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center relative group">
+                                <div class="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-[#050B14] border-2 border-white/20 text-gray-400 flex items-center justify-center text-xl md:text-2xl group-hover:border-lfkl-gold group-hover:text-lfkl-gold transition-all duration-300 mb-4 md:mb-6 z-10 relative">
+                                    <i class="ph ph-check-circle"></i>
+                                </div>
+                                <div class="glass-card p-5 md:p-6 rounded-2xl h-full border border-white/5 group-hover:-translate-y-1 md:group-hover:-translate-y-2 transition-transform duration-300 opacity-90 md:opacity-80 group-hover:opacity-100">
+                                    <div class="text-gray-400 md:text-gray-500 font-bold text-[10px] md:text-sm mb-1 uppercase tracking-wider group-hover:text-lfkl-gold transition-colors">Étape 04</div>
+                                    <h4 class="font-bold text-white text-base md:text-lg mb-2">Inscription</h4>
+                                    <p class="text-xs md:text-sm text-gray-400">Validation finale, règlement et accueil de votre enfant.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-20 md:mt-32">
+                        <button onclick="navigate('admissions')" class="btn-premium px-8 py-4 md:px-12 md:py-5 text-base md:text-xl shadow-[0_10px_30px_rgba(212,175,55,0.3)] hover:-translate-y-2 transition-transform w-full sm:w-auto"><i class="ph ph-paper-plane-tilt text-xl md:text-2xl"></i> Initier mon dossier</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIE SCOLAIRE & INTERNATIONAL (MASONRY) -->
+            <section id="international" class="py-20 md:py-24 px-4 md:px-6 relative">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 md:mb-16 gs-reveal">
+                        <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 font-semibold">Rayonnement</h2>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-white mb-6">Une fenêtre sur le monde</h3>
+                        
+                        <div class="flex flex-wrap justify-center gap-2 md:gap-3" id="masonry-filters">
+                            <button data-filter="all" class="filter-btn px-4 py-2 rounded-full bg-lfkl-gold text-lfkl-deep font-bold text-xs md:text-sm transition-all shadow-md">Tout</button>
+                            <button data-filter="sports" class="filter-btn px-4 py-2 rounded-full glass hover:border-lfkl-gold text-white text-xs md:text-sm transition-all">Sports</button>
+                            <button data-filter="arts" class="filter-btn px-4 py-2 rounded-full glass hover:border-lfkl-gold text-white text-xs md:text-sm transition-all">Arts & Sciences</button>
+                            <button data-filter="voyages" class="filter-btn px-4 py-2 rounded-full glass hover:border-lfkl-gold text-white text-xs md:text-sm transition-all">Voyages & Événements</button>
+                        </div>
+                    </div>
+
+                    <div class="masonry-grid gs-reveal" id="masonry-container">
+                        <div class="masonry-item group cursor-pointer" data-category="voyages">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Voyage">
+                            <div class="absolute bottom-0 left-0 p-5 md:p-6 z-20 transform translate-y-2 md:translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <span class="text-[10px] md:text-xs text-lfkl-gold uppercase font-bold tracking-wider">Voyage Scolaire</span>
+                                <h4 class="text-white font-serif text-lg md:text-xl mt-1">Découverte de la jungle malaise</h4>
+                            </div>
+                        </div>
+                        <div class="masonry-item group cursor-pointer" data-category="voyages">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=800&auto=format&fit=crop" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Événement">
+                            <div class="absolute bottom-0 left-0 p-5 md:p-6 z-20 transform translate-y-2 md:translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <span class="text-[10px] md:text-xs text-lfkl-gold uppercase font-bold tracking-wider">Événement</span>
+                                <h4 class="text-white font-serif text-lg md:text-xl mt-1">Semaine de la Francophonie</h4>
+                            </div>
+                        </div>
+                        <div class="masonry-item group cursor-pointer" data-category="sports">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Sport">
+                            <div class="absolute bottom-0 left-0 p-5 md:p-6 z-20 transform translate-y-2 md:translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <span class="text-[10px] md:text-xs text-lfkl-gold uppercase font-bold tracking-wider">Sport</span>
+                                <h4 class="text-white font-serif text-lg md:text-xl mt-1">Tournoi inter-écoles d'Asie</h4>
+                            </div>
+                        </div>
+                        <div class="masonry-item group cursor-pointer" data-category="arts">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Science">
+                            <div class="absolute bottom-0 left-0 p-5 md:p-6 z-20 transform translate-y-2 md:translate-y-4 group-hover:translate-y-0 transition-transform">
+                                <span class="text-[10px] md:text-xs text-lfkl-gold uppercase font-bold tracking-wider">Sciences</span>
+                                <h4 class="text-white font-serif text-lg md:text-xl mt-1">Labo de robotique 2026</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- FIN VUE ACCUEIL -->
+
+        <!-- ============================================== -->
+        <!-- VUE 2 : ÉCOLE                                  -->
+        <!-- ============================================== -->
+        <div id="view-etablissement" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+            <div class="relative w-full h-[30vh] md:h-[40vh] bg-[#050B14] flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl mx-4 max-w-[calc(100%-2rem)] xl:max-w-7xl xl:mx-auto">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] to-transparent"></div>
+                <div class="relative z-10 text-center px-4 md:px-6 mt-8 md:mt-12 gs-reveal">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2 md:mb-4">Notre <span class="text-gradient italic">École</span></h1>
+                    <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">L'histoire, les valeurs et l'excellence académique d'un établissement conventionné AEFE.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 md:px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center mb-16 md:mb-24 gs-reveal">
+                    <div>
+                        <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 font-semibold">Le Mot de la Direction</h2>
+                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-serif text-white mb-4 md:mb-6">Former les citoyens du monde</h3>
+                        <p class="text-sm md:text-base text-gray-400 mb-4 leading-relaxed text-justify">Depuis sa création, le LFKL s'engage à offrir une éducation d'excellence, alliant la rigueur du système éducatif français à une ouverture internationale inégalée. Notre campus accueille des élèves de plus de 45 nationalités, favorisant ainsi le multiculturalisme au quotidien.</p>
+                        <p class="text-sm md:text-base text-gray-400 leading-relaxed text-justify mb-6 md:mb-8">Nous préparons nos élèves non seulement à exceller académiquement, mais aussi à devenir des individus responsables, créatifs et prêts à relever les défis de demain dans un monde en constante évolution.</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-lfkl-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Proviseure">
+                            </div>
+                            <div>
+                                <div class="font-serif font-bold text-lg md:text-xl text-white">Mme. Dubois</div>
+                                <div class="text-lfkl-gold text-xs md:text-sm font-semibold">Proviseure du LFKL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="glow-bg w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-lfkl-gold/20 -right-5 md:-right-10 top-5 md:top-10"></div>
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" class="rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 w-full object-cover h-[350px] md:h-[500px]" alt="Bâtiment LFKL">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center gs-reveal">
+                    <div class="glass-card p-4 md:p-8 rounded-2xl hover:-translate-y-2 transition-transform">
+                        <div class="text-3xl md:text-5xl font-serif text-lfkl-gold font-bold mb-1 md:mb-2">100%</div>
+                        <div class="text-[10px] md:text-sm text-gray-400 uppercase tracking-wide font-bold">Réussite au BAC</div>
+                    </div>
+                    <div class="glass-card p-4 md:p-8 rounded-2xl hover:-translate-y-2 transition-transform">
+                        <div class="text-3xl md:text-5xl font-serif text-lfkl-gold font-bold mb-1 md:mb-2">45+</div>
+                        <div class="text-[10px] md:text-sm text-gray-400 uppercase tracking-wide font-bold">Nationalités</div>
+                    </div>
+                    <div class="glass-card p-4 md:p-8 rounded-2xl hover:-translate-y-2 transition-transform">
+                        <div class="text-3xl md:text-5xl font-serif text-lfkl-gold font-bold mb-1 md:mb-2">900</div>
+                        <div class="text-[10px] md:text-sm text-gray-400 uppercase tracking-wide font-bold">Élèves</div>
+                    </div>
+                    <div class="glass-card p-4 md:p-8 rounded-2xl hover:-translate-y-2 transition-transform">
+                        <div class="text-3xl md:text-5xl font-serif text-lfkl-gold font-bold mb-1 md:mb-2">AEFE</div>
+                        <div class="text-[10px] md:text-sm text-gray-400 uppercase tracking-wide font-bold">Réseau Mondial</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VUE 3 : ÉDUCATION                              -->
+        <!-- ============================================== -->
+        <div id="view-pedagogie" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+            <div class="relative w-full h-[30vh] md:h-[40vh] bg-[#050B14] flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl mx-4 max-w-[calc(100%-2rem)] xl:max-w-7xl xl:mx-auto">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] to-transparent"></div>
+                <div class="relative z-10 text-center px-4 md:px-6 mt-8 md:mt-12 gs-reveal">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2 md:mb-4">Notre <span class="text-gradient italic">Éducation</span></h1>
+                    <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">De la Maternelle au Baccalauréat Français International (BFI).</p>
+                </div>
+            </div>
+            
+            <div class="max-w-6xl mx-auto px-4 md:px-6 space-y-16 md:space-y-24">
+                <!-- Section Maternelle -->
+                <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center gs-reveal">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="glow-bg w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-blue-500/20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop" class="rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.5)] border border-white/10 w-full relative z-10" alt="Maternelle">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="inline-flex items-center gap-2 text-lfkl-gold font-bold mb-2 md:mb-3 px-3 py-1 bg-lfkl-gold/10 rounded-full border border-lfkl-gold/20 text-xs md:text-base"><i class="ph ph-baby text-lg md:text-xl"></i> Cycle 1</div>
+                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-serif text-white mb-3 md:mb-4">École Maternelle</h3>
+                        <p class="text-sm md:text-base text-gray-400 mb-4 md:mb-6 leading-relaxed">L’école maternelle est une étape fondamentale. Elle a pour mission principale de donner envie aux enfants d’aller à l’école pour apprendre, affirmer et épanouir leur personnalité dans un cadre bilingue.</p>
+                        <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-300">
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Immersion linguistique (Français, Anglais)</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Apprentissage par le jeu et la manipulation</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Motricité globale et fine</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section Primaire -->
+                <div class="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center gs-reveal">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="glow-bg w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-lfkl-gold/20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=800&auto=format&fit=crop" class="rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.5)] border border-white/10 w-full relative z-10" alt="Primaire">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="inline-flex items-center gap-2 text-lfkl-gold font-bold mb-2 md:mb-3 px-3 py-1 bg-lfkl-gold/10 rounded-full border border-lfkl-gold/20 text-xs md:text-base"><i class="ph ph-backpack text-lg md:text-xl"></i> Cycles 2 & 3</div>
+                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-serif text-white mb-3 md:mb-4">École Élémentaire</h3>
+                        <p class="text-sm md:text-base text-gray-400 mb-4 md:mb-6 leading-relaxed">L'école conforte les apprentissages fondamentaux : lecture, écriture, calcul et respect d'autrui. La maîtrise de la langue française et l'ouverture scientifique sont au cœur du projet.</p>
+                        <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-300">
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Pédagogie de projet pluridisciplinaire</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Enseignement de l'anglais renforcé</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Découverte scientifique et numérique</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section Secondaire -->
+                <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center gs-reveal">
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="glow-bg w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-blue-500/20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                        <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=800&auto=format&fit=crop" class="rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.5)] border border-white/10 w-full relative z-10" alt="Secondaire">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="inline-flex items-center gap-2 text-lfkl-gold font-bold mb-2 md:mb-3 px-3 py-1 bg-lfkl-gold/10 rounded-full border border-lfkl-gold/20 text-xs md:text-base"><i class="ph ph-graduation-cap text-lg md:text-xl"></i> Secondaire</div>
+                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-serif text-white mb-3 md:mb-4">Collège & Lycée</h3>
+                        <p class="text-sm md:text-base text-gray-400 mb-4 md:mb-6 leading-relaxed">Le secondaire accompagne l'élève jusqu'au Baccalauréat. Nous proposons le BFI (Baccalauréat Français International), véritable passeport pour les meilleures universités mondiales.</p>
+                        <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-300">
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Préparation au Brevet (DNB)</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Section Internationale BFI (Américaine)</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Certifications en langues (Cambridge, Cervantes)</li>
+                            <li class="flex items-center gap-3 glass-card px-3 py-2 md:px-4 md:py-2 rounded-lg"><i class="ph ph-check-circle text-lfkl-gold text-lg md:text-xl"></i> Cellule d'orientation universitaire dédiée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VUE 4 : VIE SCOLAIRE                           -->
+        <!-- ============================================== -->
+        <div id="view-viescolaire" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+            <div class="relative w-full h-[30vh] md:h-[40vh] bg-[#050B14] flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl mx-4 max-w-[calc(100%-2rem)] xl:max-w-7xl xl:mx-auto">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] to-transparent"></div>
+                <div class="relative z-10 text-center px-4 md:px-6 mt-8 md:mt-12 gs-reveal">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2 md:mb-4">Vie <span class="text-gradient italic">Scolaire</span></h1>
+                    <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">Un écosystème bienveillant pensé pour l'épanouissement personnel, sportif et artistique.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 md:px-6">
+                <!-- AES -->
+                <div class="mb-16 md:mb-24">
+                    <div class="text-center mb-8 md:mb-12 gs-reveal">
+                        <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 font-semibold">Développement Personnel</h2>
+                        <h3 class="text-2xl md:text-3xl lg:text-4xl font-serif text-white">Activités Extra-Scolaires (AES)</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 gs-reveal">
+                        <div class="glass-card rounded-2xl md:rounded-3xl overflow-hidden group border border-white/10 hover:border-lfkl-gold/50">
+                            <div class="h-48 md:h-60 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Sports">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] to-transparent opacity-80"></div>
+                                <div class="absolute bottom-4 left-4 text-white flex items-center gap-2"><i class="ph ph-soccer-ball text-lfkl-gold text-xl md:text-2xl"></i> <span class="font-bold text-lg md:text-xl">Académies Sportives</span></div>
+                            </div>
+                            <div class="p-5 md:p-6">
+                                <p class="text-xs md:text-sm text-gray-400 mb-4">Football, Natation, Escalade, Basketball. Des infrastructures professionnelles pour dépasser ses limites.</p>
+                                <button class="text-lfkl-gold text-xs md:text-sm font-bold hover:text-white transition-colors">Découvrir les plannings →</button>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl md:rounded-3xl overflow-hidden group border border-white/10 hover:border-lfkl-gold/50">
+                            <div class="h-48 md:h-60 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Arts">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] to-transparent opacity-80"></div>
+                                <div class="absolute bottom-4 left-4 text-white flex items-center gap-2"><i class="ph ph-palette text-lfkl-gold text-xl md:text-2xl"></i> <span class="font-bold text-lg md:text-xl">Arts & Culture</span></div>
+                            </div>
+                            <div class="p-5 md:p-6">
+                                <p class="text-xs md:text-sm text-gray-400 mb-4">Théâtre, Musique, Arts plastiques. Développer la créativité et l'expression personnelle de nos élèves.</p>
+                                <button class="text-lfkl-gold text-xs md:text-sm font-bold hover:text-white transition-colors">Voir le programme →</button>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl md:rounded-3xl overflow-hidden group border border-white/10 hover:border-lfkl-gold/50 sm:col-span-2 md:col-span-1">
+                            <div class="h-48 md:h-60 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="Tech">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] to-transparent opacity-80"></div>
+                                <div class="absolute bottom-4 left-4 text-white flex items-center gap-2"><i class="ph ph-cpu text-lfkl-gold text-xl md:text-2xl"></i> <span class="font-bold text-lg md:text-xl">Tech & Sciences</span></div>
+                            </div>
+                            <div class="p-5 md:p-6">
+                                <p class="text-xs md:text-sm text-gray-400 mb-4">Robotique, Coding club, Échecs. Stimuler l'esprit logique et préparer aux compétences technologiques.</p>
+                                <button class="text-lfkl-gold text-xs md:text-sm font-bold hover:text-white transition-colors">Explorer les clubs →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Restauration / Bus -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 gs-reveal">
+                    <div class="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl border-t-4 border-t-lfkl-gold flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-lfkl-gold/20 flex items-center justify-center mb-4 md:mb-6 text-2xl md:text-3xl text-lfkl-gold shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                                <i class="ph ph-fork-knife"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-serif text-white font-bold mb-3 md:mb-4">Restauration Scolaire</h3>
+                            <p class="text-xs md:text-sm text-gray-400 mb-6 leading-relaxed">Notre chef propose des menus sains, équilibrés et variés, préparés sur place chaque jour avec des produits frais. Les repas allient tradition culinaire française et saveurs locales (Halal et végétarien).</p>
+                        </div>
+                        <button class="btn-outline self-start text-xs md:text-sm w-full sm:w-auto">Menu de la semaine</button>
+                    </div>
+                    <div class="glass-card p-6 md:p-10 rounded-2xl md:rounded-3xl border-t-4 border-t-blue-500 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-4 md:mb-6 text-2xl md:text-3xl text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                                <i class="ph ph-bus"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-serif text-white font-bold mb-3 md:mb-4">Service de Transport</h3>
+                            <p class="text-xs md:text-sm text-gray-400 mb-6 leading-relaxed">Un réseau de bus scolaires privé, sécurisé et climatisé dessert l'ensemble des principaux quartiers de Kuala Lumpur. Un suivi GPS en temps réel est accessible aux parents via notre application.</p>
+                        </div>
+                        <button class="btn-premium self-start text-xs md:text-sm w-full sm:w-auto">Lignes et Tarifs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VUE 5 : ADMISSIONS                             -->
+        <!-- ============================================== -->
+        <div id="view-admissions" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+            <div class="relative w-full h-[30vh] md:h-[35vh] bg-[#050B14] flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl mx-4 max-w-[calc(100%-2rem)] xl:max-w-7xl xl:mx-auto">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] to-transparent"></div>
+                <div class="relative z-10 text-center px-4 md:px-6 mt-8 md:mt-12 gs-reveal">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2 md:mb-4"><span class="text-gradient italic">Admissions</span></h1>
+                    <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">Rejoignez une communauté d'excellence. Découvrez nos modalités d'inscription.</p>
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 md:px-6">
+                <!-- Processus Eduka -->
+                <div class="glass-card rounded-2xl md:rounded-3xl p-6 md:p-12 mb-16 md:mb-20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative overflow-hidden gs-reveal">
+                    <div class="glow-bg w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-lfkl-gold/10 -top-10 md:-top-20 -right-10 md:-right-20"></div>
+                    
+                    <h2 class="text-xl md:text-2xl font-serif text-white font-bold mb-4 md:mb-6 border-b border-white/10 pb-4 relative z-10">Comment inscrire votre enfant ?</h2>
+                    <p class="text-xs md:text-sm text-gray-400 mb-6 md:mb-10 relative z-10">Les inscriptions sont ouvertes tout au long de l'année, sous réserve de places disponibles. Nous accueillons les enfants francophones et non-francophones grâce à notre dispositif de soutien.</p>
+                    
+                    <div class="space-y-4 md:space-y-6 relative z-10">
+                        <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+                            <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-lfkl-gold text-[#050B14] flex items-center justify-center font-bold text-lg md:text-xl flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.4)]">1</div>
+                            <div class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-xl md:rounded-2xl flex-grow hover:bg-white/10 transition-colors">
+                                <h4 class="font-bold text-white text-base md:text-xl mb-1 md:mb-2">Création du dossier en ligne (Eduka)</h4>
+                                <p class="text-xs md:text-sm text-gray-400">Rendez-vous sur notre portail famille sécurisé pour créer votre compte et soumettre les documents initiaux requis.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+                            <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-transparent border-2 border-lfkl-gold text-lfkl-gold flex items-center justify-center font-bold text-lg md:text-xl flex-shrink-0">2</div>
+                            <div class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-xl md:rounded-2xl flex-grow hover:bg-white/10 transition-colors">
+                                <h4 class="font-bold text-white text-base md:text-xl mb-1 md:mb-2">Étude du dossier & Entretien</h4>
+                                <p class="text-xs md:text-sm text-gray-400">Notre équipe étudiera le dossier. Un entretien sera organisé avec la direction selon le niveau de l'enfant.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+                            <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-transparent border-2 border-gray-600 text-gray-500 flex items-center justify-center font-bold text-lg md:text-xl flex-shrink-0">3</div>
+                            <div class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-xl md:rounded-2xl flex-grow hover:bg-white/10 transition-colors">
+                                <h4 class="font-bold text-white text-base md:text-xl mb-1 md:mb-2">Confirmation et Paiement</h4>
+                                <p class="text-xs md:text-sm text-gray-400">Dès réception de l'offre de place, vous disposez de 10 jours pour confirmer l'inscription en réglant les frais.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 md:mt-12 text-center relative z-10">
+                        <button class="btn-premium px-6 py-3 md:px-10 md:py-4 text-sm md:text-lg shadow-[0_10px_30px_rgba(212,175,55,0.3)] w-full sm:w-auto"><i class="ph ph-link text-lg md:text-xl"></i> Accéder au portail Eduka</button>
+                    </div>
+                </div>
+
+                <!-- Tableau Tarifs -->
+                <div class="text-center mb-8 md:mb-10 gs-reveal">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-lfkl-gold mb-2 font-semibold">Investissement</h2>
+                    <h3 class="text-2xl md:text-3xl font-serif text-white">Frais de Scolarité</h3>
+                </div>
+                
+                <div class="overflow-x-auto rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl mb-16 md:mb-20 glass-card gs-reveal">
+                    <table class="w-full text-left border-collapse text-white min-w-[500px]">
+                        <thead>
+                            <tr class="bg-white/10 border-b border-white/20 backdrop-blur-md">
+                                <th class="p-4 md:p-6 font-serif text-sm md:text-lg font-normal">Niveau d'enseignement</th>
+                                <th class="p-4 md:p-6 font-serif text-sm md:text-lg font-normal">Inscription <span class="hidden sm:inline">(Unique)</span></th>
+                                <th class="p-4 md:p-6 font-serif text-sm md:text-lg font-normal text-lfkl-gold">Scolarité <span class="hidden sm:inline">annuelle</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                <td class="p-4 md:p-6 font-bold flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs md:text-base"><div class="flex items-center gap-2"><i class="ph ph-baby text-lfkl-gold text-xl md:text-2xl"></i> Maternelle</div> <span class="font-normal text-gray-500 text-[10px] md:text-sm">(TPS-GS)</span></td>
+                                <td class="p-4 md:p-6 text-gray-400 text-xs md:text-base">6,000 MYR</td>
+                                <td class="p-4 md:p-6 font-bold text-sm md:text-lg text-white">28,500 MYR</td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                <td class="p-4 md:p-6 font-bold flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs md:text-base"><div class="flex items-center gap-2"><i class="ph ph-backpack text-lfkl-gold text-xl md:text-2xl"></i> Primaire</div> <span class="font-normal text-gray-500 text-[10px] md:text-sm">(CP-CM2)</span></td>
+                                <td class="p-4 md:p-6 text-gray-400 text-xs md:text-base">6,000 MYR</td>
+                                <td class="p-4 md:p-6 font-bold text-sm md:text-lg text-white">35,200 MYR</td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                <td class="p-4 md:p-6 font-bold flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs md:text-base"><div class="flex items-center gap-2"><i class="ph ph-books text-lfkl-gold text-xl md:text-2xl"></i> Collège</div> <span class="font-normal text-gray-500 text-[10px] md:text-sm">(6ème-3ème)</span></td>
+                                <td class="p-4 md:p-6 text-gray-400 text-xs md:text-base">6,000 MYR</td>
+                                <td class="p-4 md:p-6 font-bold text-sm md:text-lg text-white">42,800 MYR</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-4 md:p-6 font-bold flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs md:text-base"><div class="flex items-center gap-2"><i class="ph ph-graduation-cap text-lfkl-gold text-xl md:text-2xl"></i> Lycée</div> <span class="font-normal text-gray-500 text-[10px] md:text-sm">(2nde-Term)</span></td>
+                                <td class="p-4 md:p-6 text-gray-400 text-xs md:text-base">6,000 MYR</td>
+                                <td class="p-4 md:p-6 font-bold text-sm md:text-lg text-white">51,000 MYR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Contact -->
+                <div class="glass-card p-6 md:p-12 rounded-2xl md:rounded-3xl text-center border-t-4 border-lfkl-gold gs-reveal relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-lfkl-gold/20 rounded-full flex items-center justify-center mb-4 md:mb-6 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                            <i class="ph ph-envelope-open text-2xl md:text-3xl text-lfkl-gold"></i>
+                        </div>
+                        <h3 class="text-xl md:text-3xl font-serif text-white font-bold mb-3 md:mb-4">Besoin d'un accompagnement personnalisé ?</h3>
+                        <p class="text-xs md:text-sm text-gray-400 mb-6 md:mb-8 max-w-xl mx-auto">Notre équipe des admissions est disponible pour répondre à toutes vos questions ou organiser une visite du campus.</p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+                            <a href="mailto:admissions@lfkl.edu.my" class="btn-premium text-xs md:text-sm"><i class="ph ph-envelope"></i> Nous écrire</a>
+                            <a href="tel:+60362504415" class="btn-outline text-xs md:text-sm"><i class="ph ph-phone"></i> +60 3 6250 4415</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- VUE 6 : ESPACE PRO                             -->
+        <!-- ============================================== -->
+        <div id="view-professionnel" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+             <div class="relative w-full h-[30vh] md:h-[35vh] bg-[#050B14] flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl mx-4 max-w-[calc(100%-2rem)] xl:max-w-7xl xl:mx-auto">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050B14] to-transparent"></div>
+                <div class="relative z-10 text-center px-4 md:px-6 mt-8 md:mt-12 gs-reveal">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2 md:mb-4">Espace <span class="text-gradient italic">Professionnel</span></h1>
+                    <p class="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">Rejoignez une équipe internationale dynamique et intégrez le réseau d'excellence de l'AEFE.</p>
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 md:px-6 gs-reveal">
+                <h2 class="text-2xl md:text-3xl font-serif text-white font-bold mb-6 md:mb-8">Nos opportunités de carrière</h2>
+                
+                <div class="space-y-4">
+                    <div class="glass-card p-5 md:p-6 rounded-xl md:rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer border border-white/5 hover:border-lfkl-gold transition-colors">
+                        <div class="mb-4 md:mb-0">
+                            <div class="flex flex-wrap items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                                <span class="bg-blue-900/50 text-blue-300 text-[10px] md:text-xs px-2 py-1 md:px-3 rounded-full border border-blue-500/30 font-bold">Temps Plein</span>
+                                <span class="text-[10px] md:text-sm text-gray-500 flex items-center gap-1"><i class="ph ph-calendar-blank"></i> Rentrée 2026</span>
+                            </div>
+                            <h3 class="text-lg md:text-xl text-white font-bold group-hover:text-lfkl-gold transition-colors">Professeur(e) des Écoles (Expatrié/Résident)</h3>
+                            <p class="text-xs md:text-sm text-gray-400 mt-1 md:mt-2">Niveau Maternelle/Primaire. Titulaire de l'Éducation Nationale requis. Expérience à l'international appréciée.</p>
+                        </div>
+                        <button class="btn-outline px-6 py-2 md:px-8 md:py-3 text-xs md:text-sm whitespace-nowrap group-hover:bg-lfkl-gold/10 w-full md:w-auto">Postuler</button>
+                    </div>
+                    
+                    <div class="glass-card p-5 md:p-6 rounded-xl md:rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer border border-white/5 hover:border-lfkl-gold transition-colors">
+                        <div class="mb-4 md:mb-0">
+                            <div class="flex flex-wrap items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                                <span class="bg-blue-900/50 text-blue-300 text-[10px] md:text-xs px-2 py-1 md:px-3 rounded-full border border-blue-500/30 font-bold">Temps Plein</span>
+                                <span class="text-[10px] md:text-sm text-gray-500 flex items-center gap-1"><i class="ph ph-calendar-blank"></i> Immédiat</span>
+                            </div>
+                            <h3 class="text-lg md:text-xl text-white font-bold group-hover:text-lfkl-gold transition-colors">Chargé(e) de Communication Bilingue (FR/EN)</h3>
+                            <p class="text-xs md:text-sm text-gray-400 mt-1 md:mt-2">Développement de la stratégie digitale, gestion des réseaux sociaux et relation publique interne/externe.</p>
+                        </div>
+                        <button class="btn-outline px-6 py-2 md:px-8 md:py-3 text-xs md:text-sm whitespace-nowrap group-hover:bg-lfkl-gold/10 w-full md:w-auto">Postuler</button>
+                    </div>
+                </div>
+
+                <div class="mt-12 md:mt-20 glass-card border border-white/10 p-6 md:p-12 rounded-2xl md:rounded-3xl text-center relative overflow-hidden">
+                    <div class="glow-bg w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-lfkl-gold/10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="relative z-10">
+                        <i class="ph ph-chalkboard-teacher text-4xl md:text-5xl text-lfkl-gold mb-4 md:mb-6 block drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"></i>
+                        <h3 class="text-xl md:text-2xl text-white font-serif font-bold mb-3 md:mb-4">Candidature Spontanée</h3>
+                        <p class="text-xs md:text-sm text-gray-400 mb-6 md:mb-8 max-w-lg mx-auto">Vous ne trouvez pas d'offre correspondant à votre profil ? N'hésitez pas à nous envoyer votre CV et lettre de motivation pour nos futurs besoins.</p>
+                        <a href="mailto:recrutement@lfkl.edu.my" class="btn-premium text-xs md:text-sm w-full sm:w-auto"><i class="ph ph-paper-plane-tilt"></i> Envoyer une candidature</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#03070b] text-white pt-16 md:pt-20 pb-8 md:pb-10 border-t border-white/10 mt-12 md:mt-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
+                <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                    <div class="w-10 h-10 md:w-12 md:h-12 border-2 border-lfkl-gold rounded-full flex items-center justify-center mb-4 md:mb-6">
+                        <span class="font-serif text-lfkl-gold font-bold text-lg md:text-xl">L</span>
+                    </div>
+                    <h3 class="font-serif text-lg md:text-xl mb-3 md:mb-4 text-white">Lycée Français de Kuala Lumpur</h3>
+                    <p class="text-gray-500 text-xs md:text-sm">L'excellence de l'éducation française au cœur de l'Asie du Sud-Est.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 md:mb-6 text-lfkl-gold text-sm md:text-base">Navigation</h4>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-400">
+                        <li><a href="#" onclick="navigate('etablissement')" class="hover:text-white transition-colors">École</a></li>
+                        <li><a href="#" onclick="navigate('pedagogie')" class="hover:text-white transition-colors">Éducation</a></li>
+                        <li><a href="#" onclick="navigate('admissions')" class="hover:text-white transition-colors">Admission</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 md:mb-6 text-lfkl-gold text-sm md:text-base">Contact</h4>
+                    <ul class="space-y-2 md:space-y-3 text-xs md:text-sm text-gray-400">
+                        <li class="flex items-start md:items-center gap-2"><i class="ph ph-map-pin text-lfkl-gold mt-1 md:mt-0"></i> 34 Jalan Dutamas Raya, KL</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-phone text-lfkl-gold"></i> +60 3 6250 4415</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 md:mb-6 text-lfkl-gold text-sm md:text-base">Réseaux</h4>
+                    <div class="flex gap-3 md:gap-4">
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lfkl-gold hover:text-lfkl-deep transition-all border border-white/10"><i class="ph ph-facebook-logo text-lg md:text-xl"></i></a>
+                        <a href="#" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-lfkl-gold hover:text-lfkl-deep transition-all border border-white/10"><i class="ph ph-instagram-logo text-lg md:text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 text-center md:text-left gap-2">
+                <p>&copy; 2026 Lycée Français de Kuala Lumpur. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WIDGET APPEL -->
+    <a href="tel:+60362504415" class="fixed bottom-4 md:bottom-6 right-4 md:right-6 h-12 md:h-14 min-w-[48px] md:min-w-[56px] px-0 hover:px-5 md:hover:px-6 bg-lfkl-gold text-lfkl-deep rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center transition-all duration-300 z-50 group border border-lfkl-gold/50 cursor-pointer">
+        <i class="ph ph-phone text-xl md:text-2xl flex-shrink-0 mx-3 md:mx-4"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:max-w-[150px] md:group-hover:max-w-[200px] group-hover:opacity-100 group-hover:mr-3 md:group-hover:mr-4 transition-all duration-500 font-bold text-xs md:text-sm">
+            +60 3 6250 4415
+        </span>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // --- MENU MOBILE ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMobileMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('translate-x-0', 'opacity-100', 'pointer-events-auto');
+                mobileMenuBtn.innerHTML = '<i class="ph ph-x text-2xl"></i>';
+                document.body.style.overflow = 'hidden'; // Empêche le scroll quand menu ouvert
+            } else {
+                mobileMenu.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+                mobileMenu.classList.remove('translate-x-0', 'opacity-100', 'pointer-events-auto');
+                mobileMenuBtn.innerHTML = '<i class="ph ph-list text-2xl"></i>';
+                document.body.style.overflow = '';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // --- 0. GÉNÉRATION DES ÉTOILES (STARFIELD) ---
+        function createStars() {
+            const starfield = document.getElementById('starfield');
+            // Moins d'étoiles sur mobile pour les perfs
+            const numStars = window.innerWidth < 768 ? 25 : 50; 
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 10;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${left}%`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `-${delay}s`;
+                
+                starfield.appendChild(star);
+            }
+        }
+        createStars();
+
+        // --- 1. SYSTÈME SPA & NAV ROBUSTE ---
+        let currentView = 'home';
+        
+        function navigate(viewId) {
+            currentView = viewId;
+            
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.add('hidden-view');
+                view.classList.remove('animate-fade-in');
+            });
+            
+            const targetView = document.getElementById('view-' + viewId);
+            if (targetView) {
+                targetView.classList.remove('hidden-view');
+                void targetView.offsetWidth; 
+                targetView.classList.add('animate-fade-in');
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if(link.getAttribute('data-target') === viewId) link.classList.add('active');
+                else link.classList.remove('active');
+            });
+
+            setTimeout(() => { initScrollTriggers(); }, 100);
+        }
+
+        // --- 2. GESTION DU LOADER ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                gsap.to('#loader', {
+                    opacity: 0, duration: 0.8, ease: "power2.inOut",
+                    onComplete: () => {
+                        document.getElementById('loader').style.display = 'none';
+                        gsap.to('.gs-hero-anim', { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" });
+                        initScrollTriggers();
+                        initCampusWebGL();
+                    }
+                });
+            }, 1000);
+        });
+
+        // Animation de la barre de menu au scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { 
+                nav.classList.add('nav-scrolled'); 
+            } else { 
+                nav.classList.remove('nav-scrolled'); 
+            }
+        });
+
+        // --- 3. GSAP INITIALISATION ---
+        gsap.registerPlugin(ScrollTrigger);
+        function initScrollTriggers() {
+            ScrollTrigger.getAll().forEach(t => t.kill());
+            document.querySelectorAll(".view-section:not(.hidden-view) .gs-reveal").forEach((elem) => {
+                gsap.fromTo(elem, { autoAlpha: 0, y: 40 }, {
+                    duration: 1, autoAlpha: 1, y: 0, ease: "power3.out",
+                    scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
+                });
+            });
+        }
+
+        // --- 4. INTERACTIVITÉ PÉDAGOGIE ---
+        const pedaItems = document.querySelectorAll('.pedagogie-menu-item');
+        const pedaPanes = document.querySelectorAll('.pedagogie-content-pane');
+
+        pedaItems.forEach(item => {
+            item.addEventListener('click', () => {
+                pedaItems.forEach(i => i.classList.remove('active'));
+                pedaPanes.forEach(p => p.classList.remove('active'));
+                item.classList.add('active');
+                document.getElementById(item.getAttribute('data-pane')).classList.add('active');
+            });
+        });
+
+        // --- 5. FILTRES MASONRY ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const masonryItems = document.querySelectorAll('.masonry-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.className = 'filter-btn px-4 py-2 rounded-full glass hover:border-lfkl-gold text-white text-xs md:text-sm transition-all';
+                });
+                btn.className = 'filter-btn px-4 py-2 rounded-full bg-lfkl-gold text-lfkl-deep font-bold text-xs md:text-sm transition-all shadow-md';
+
+                const filter = btn.getAttribute('data-filter');
+                masonryItems.forEach(item => {
+                    if(filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'inline-block';
+                        gsap.fromTo(item, {scale: 0.9, opacity: 0}, {scale: 1, opacity: 1, duration: 0.4});
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- 6. THREE.JS HÉRO ---
+        function initHeroWebGL() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Moins de particules sur mobile
+            const pCount = window.innerWidth < 768 ? 200 : 500;
+            const particlesGeometry = new THREE.BufferGeometry();
+            const posArray = new Float32Array(pCount * 3);
+            for(let i = 0; i < pCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 15;
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const canvasDot = document.createElement('canvas');
+            canvasDot.width = 16; canvasDot.height = 16;
+            const context = canvasDot.getContext('2d');
+            const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
+            gradient.addColorStop(0, 'rgba(212, 175, 55, 0.8)');
+            gradient.addColorStop(1, 'rgba(10, 25, 47, 0)');
+            context.fillStyle = gradient; context.fillRect(0, 0, 16, 16);
+            
+            const material = new THREE.PointsMaterial({ size: window.innerWidth < 768 ? 0.08 : 0.05, map: new THREE.CanvasTexture(canvasDot), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+            camera.position.z = 3;
+
+            let mouseX = 0, mouseY = 0;
+            // Support touch pour le fond héro
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+            });
+            document.addEventListener('touchmove', (e) => {
+                if(e.touches.length > 0) {
+                    mouseX = (e.touches[0].clientX - window.innerWidth / 2) * 0.002;
+                    mouseY = (e.touches[0].clientY - window.innerHeight / 2) * 0.002;
+                }
+            }, {passive: true});
+
+            function animate() {
+                requestAnimationFrame(animate);
+                if(currentView !== 'home') return; 
+                particlesMesh.rotation.y += 0.001 + (mouseX - particlesMesh.rotation.y) * 0.05;
+                particlesMesh.rotation.x += 0.0005 + (mouseY - particlesMesh.rotation.x) * 0.05;
+                renderer.render(scene, camera);
+            }
+            animate();
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        initHeroWebGL();
+
+        // --- 7. THREE.JS CAMPUS ---
+        function initCampusWebGL() {
+            const container = document.getElementById('campus-canvas-container');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 100);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            function resizeCanvas() {
+                if(currentView === 'home' && container.clientWidth > 0) {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+            }
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+            dirLight.position.set(10, 20, 10);
+            scene.add(dirLight);
+
+            const buildings = [];
+            const materialNormal = new THREE.MeshPhysicalMaterial({ color: 0x0A192F, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.8 });
+            const materialHover = new THREE.MeshPhysicalMaterial({ color: 0xD4AF37, metalness: 0.7, roughness: 0.1, emissive: 0x332200, transparent: true, opacity: 0.95 });
+
+            function createBuilding(w, h, d, x, z, name, desc) {
+                const geo = new THREE.BoxGeometry(w, h, d);
+                const mesh = new THREE.Mesh(geo, materialNormal.clone());
+                mesh.position.set(x, h/2, z);
+                mesh.userData = { name: name, desc: desc, baseMaterial: materialNormal.clone() };
+                scene.add(mesh);
+                buildings.push(mesh);
+                const edges = new THREE.EdgesGeometry(geo);
+                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xD4AF37, transparent:true, opacity:0.4 }));
+                mesh.add(line);
+                return mesh;
+            }
+
+            const ground = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.MeshBasicMaterial({ color: 0x050B14, side: THREE.DoubleSide }));
+            ground.rotation.x = Math.PI / 2;
+            scene.add(ground);
+            
+            const gridHelper = new THREE.GridHelper(30, 30, 0xD4AF37, 0x112240);
+            gridHelper.material.opacity = 0.3; gridHelper.material.transparent = true; gridHelper.position.y = 0.01;
+            scene.add(gridHelper);
+
+            createBuilding(4, 2, 4, -5, -5, "École Maternelle", "Classes bilingues et espaces de motricité.");
+            createBuilding(6, 3, 5, 2, -4, "École Élémentaire", "Espaces de projets et cours ombragées.");
+            createBuilding(5, 5, 4, -4, 3, "Collège & Lycée", "Secteurs de sciences, laboratoires technos.");
+            createBuilding(7, 1.5, 3, 3, 4, "Complexe Sportif", "Gymnase, piscines et terrains extérieurs.");
+            createBuilding(3, 4, 3, 0, 0, "Administration", "Centre de documentation et accueil principal.");
+
+            camera.position.set(15, 12, 15);
+            camera.lookAt(0, 0, 0);
+
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let hoveredBuilding = null;
+            const tooltip = document.getElementById('campus-tooltip');
+            const tooltipTitle = document.getElementById('tooltip-title');
+            const tooltipDesc = document.getElementById('tooltip-desc');
+
+            // Support Touch & Mouse pour le raycaster 3D
+            function onInteraction(clientX, clientY) {
+                const rect = container.getBoundingClientRect();
+                mouse.x = ((clientX - rect.left) / container.clientWidth) * 2 - 1;
+                mouse.y = -((clientY - rect.top) / container.clientHeight) * 2 + 1;
+                tooltip.style.left = (clientX - rect.left) + 'px';
+                tooltip.style.top = (clientY - rect.top) + 'px';
+            }
+
+            container.addEventListener('mousemove', (e) => onInteraction(e.clientX, e.clientY));
+            container.addEventListener('touchmove', (e) => {
+                if(e.touches.length > 0) onInteraction(e.touches[0].clientX, e.touches[0].clientY);
+            }, {passive: true});
+
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            
+            // Drag Mouse
+            container.addEventListener('mousedown', (e) => { isDragging = true; previousMousePosition = { x: e.offsetX, y: e.offsetY }; });
+            window.addEventListener('mouseup', () => isDragging = false);
+            container.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    scene.rotation.y += (e.offsetX - previousMousePosition.x) * 0.01;
+                    previousMousePosition = { x: e.offsetX, y: e.offsetY };
+                }
+            });
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+                if(hoveredBuilding) hoveredBuilding.material = hoveredBuilding.userData.baseMaterial;
+                hoveredBuilding = null;
+                tooltip.style.opacity = 0;
+            });
+
+            // Drag Touch
+            container.addEventListener('touchstart', (e) => {
+                if(e.touches.length > 0) {
+                    isDragging = true;
+                    previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+            }, {passive: true});
+            window.addEventListener('touchend', () => isDragging = false);
+            container.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length > 0) {
+                    scene.rotation.y += (e.touches[0].clientX - previousMousePosition.x) * 0.01;
+                    previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+            }, {passive: true});
+
+            function animateCampus() {
+                requestAnimationFrame(animateCampus);
+                if (currentView !== 'home') return;
+                if (container.clientWidth !== renderer.domElement.width) resizeCanvas();
+
+                if(!isDragging) scene.rotation.y += 0.001;
+
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(buildings);
+
+                if (intersects.length > 0) {
+                    const object = intersects[0].object;
+                    if (hoveredBuilding !== object) {
+                        if (hoveredBuilding) hoveredBuilding.material = hoveredBuilding.userData.baseMaterial;
+                        hoveredBuilding = object;
+                        hoveredBuilding.material = materialHover;
+                        tooltipTitle.textContent = hoveredBuilding.userData.name;
+                        tooltipDesc.textContent = hoveredBuilding.userData.desc;
+                        tooltip.style.opacity = 1;
+                        document.body.style.cursor = 'pointer';
+                    }
+                } else {
+                    if (hoveredBuilding) {
+                        hoveredBuilding.material = hoveredBuilding.userData.baseMaterial;
+                        hoveredBuilding = null;
+                        tooltip.style.opacity = 0;
+                        document.body.style.cursor = 'grab';
+                    }
+                }
+                renderer.render(scene, camera);
+            }
+            resizeCanvas();
+            animateCampus();
+            window.addEventListener('resize', resizeCanvas);
+        }
+        
+        // --- 8. SYSTÈME DE TRADUCTION BILINGUE ---
+        const translations = {
+            fr: {
+                "nav-ecole": "École", "nav-edu": "Éducation", "nav-vie": "Vie Scolaire", "nav-adm": "Admission", "nav-pro": "Professionnelle", "nav-insc": "Inscription",
+                "hero-badge": "Kuala Lumpur, Malaisie",
+                "hero-title": `Excellence.<br>\n<span class="text-gradient italic font-light">Ouverture.</span> Réussite.`,
+                "hero-p": "Un enseignement d'excellence française dans un environnement profondément multiculturel et technologiquement avancé.",
+                "hero-btn-camp": "Découvrir le campus", "hero-btn-adm": `Admission <i class="ph ph-arrow-right"></i>`, "hero-scroll": "Explorer"
+            },
+            en: {
+                "nav-ecole": "School", "nav-edu": "Education", "nav-vie": "School Life", "nav-adm": "Admissions", "nav-pro": "Careers", "nav-insc": "Apply Now",
+                "hero-badge": "Kuala Lumpur, Malaysia",
+                "hero-title": `Excellence.<br>\n<span class="text-gradient italic font-light">Openness.</span> Success.`,
+                "hero-p": "French educational excellence in a deeply multicultural and technologically advanced environment.",
+                "hero-btn-camp": "Discover campus", "hero-btn-adm": `Admissions <i class="ph ph-arrow-right"></i>`, "hero-scroll": "Scroll"
+            }
+        };
+
+        const btnFrs = document.querySelectorAll('.lang-fr');
+        const btnEns = document.querySelectorAll('.lang-en');
+
+        function setLanguage(lang) {
+            if (lang === 'fr') {
+                btnFrs.forEach(btnFr => { btnFr.classList.add('text-lfkl-gold'); btnFr.classList.remove('text-gray-400'); });
+                btnEns.forEach(btnEn => { btnEn.classList.remove('text-lfkl-gold'); btnEn.classList.add('text-gray-400'); });
+            } else {
+                btnEns.forEach(btnEn => { btnEn.classList.add('text-lfkl-gold'); btnEn.classList.remove('text-gray-400'); });
+                btnFrs.forEach(btnFr => { btnFr.classList.remove('text-lfkl-gold'); btnFr.classList.add('text-gray-400'); });
+            }
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+        }
+
+        btnFrs.forEach(btn => btn.addEventListener('click', () => setLanguage('fr')));
+        btnEns.forEach(btn => btn.addEventListener('click', () => setLanguage('en')));
+    </script>
+</body>
+</html>
