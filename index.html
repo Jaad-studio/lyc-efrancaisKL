@@ -47,7 +47,7 @@
         #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; overflow: hidden; }
         .star { position: absolute; border-radius: 50%; animation: floatUp linear infinite; }
         .star-red { background: #DA291C; box-shadow: 0 0 8px 1px rgba(218, 41, 28, 0.3); opacity: 0.3; }
-        .star-blue { background: #00205B; box-shadow: 0 0 8px 1px rgba(0, 32, 91, 0.3); opacity: 0.15; }
+        .star-blue { background: #00205B; box-shadow: 0 0 8px 1px rgba(0, 32, 91, 0.2); opacity: 0.15; }
         .star-white { background: #FFFFFF; box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.6); opacity: 0.5; }
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
@@ -66,10 +66,10 @@
         }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 1);
             box-shadow: 0 10px 40px rgba(0, 32, 91, 0.04);
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -96,7 +96,7 @@
         }
         @keyframes dash { to { stroke-dashoffset: 0; fill: rgba(255, 255, 255, 0.1); } }
 
-        /* Grid Centrée */
+        /* Grid Centrée pour les images */
         .masonry-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
         .masonry-item { display: block; width: 100%; position: relative; overflow: hidden; border-radius: 16px; transition: transform 0.4s ease, opacity 0.4s ease; box-shadow: 0 10px 30px rgba(0,32,91,0.08); }
         @media (min-width: 768px) { .masonry-item { width: calc(50% - 0.75rem); } }
@@ -131,6 +131,7 @@
             to { opacity: 1; transform: translateY(0); filter: blur(0); } 
         }
 
+        /* Nav link styles */
         .nav-link { position: relative; padding: 0.5rem 0; color: rgba(255, 255, 255, 0.8) !important; font-weight: 500; }
         .nav-link:hover { color: #ffffff !important; }
         .nav-link.active { color: #ffffff !important; font-weight: 700; }
@@ -159,7 +160,6 @@
 
     <div id="starfield"></div>
 
-    <!-- LOADER -->
     <div id="loader">
         <svg class="svg-logo w-24 h-24 mb-6" viewBox="0 0 100 100">
             <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" />
@@ -220,21 +220,26 @@
 
         <!-- VUE 1 : ACCUEIL -->
         <div id="view-home" class="view-section">
+            
             <header id="hero" class="relative w-full h-screen flex items-center justify-center overflow-hidden bg-france-blue">
                 <canvas id="hero-canvas"></canvas>
                 <div class="absolute inset-0 bg-gradient-to-br from-[#00205B] via-[#001438] to-[#000d24]"></div>
+                
                 <div class="relative z-10 text-center px-4 max-w-6xl mx-auto hero-content mt-16 w-full">
                     <div class="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-8 gs-hero-anim shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-france-red animate-pulse"></span>
                         <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase" data-i18n="hero-badge">Kuala Lumpur, Malaisie</span>
                     </div>
+                    
                     <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-serif font-bold leading-tight md:leading-none mb-6 gs-hero-anim relative" data-i18n="hero-title">
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">EURO</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#DA291C] to-[#A61911] drop-shadow-[0_0_30px_rgba(218,41,28,0.4)]">campus</span><br>
                         <span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light mt-4 md:mt-6 block tracking-[0.2em] uppercase">Excellence. Ouverture. Réussite.</span>
                     </h1>
+                    
                     <p class="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto mb-10 gs-hero-anim px-2" data-i18n="hero-p">
                         Un enseignement d'excellence française dans un environnement profondément multiculturel et technologiquement avancé.
                     </p>
+                    
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 gs-hero-anim w-full px-6 md:px-0">
                         <button onclick="document.getElementById('campus').scrollIntoView({behavior: 'smooth'})" class="btn-premium w-full sm:w-auto text-center py-3 md:py-4 px-6 md:px-8 text-base md:text-lg text-white" data-i18n="hero-btn-camp">Découvrir le campus</button>
                         <button onclick="navigate('admissions')" class="btn-outline w-full sm:w-auto text-center py-3 md:py-4 px-6 md:px-8 text-base md:text-lg border-white/50 text-white hover:bg-white/10" data-i18n="hero-btn-adm">
@@ -242,81 +247,196 @@
                         </button>
                     </div>
                 </div>
+
                 <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#F4F7F9] to-transparent"></div>
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce text-gray-400 hover:text-white transition-colors cursor-pointer z-10" onclick="document.getElementById('campus').scrollIntoView({behavior: 'smooth'})">
+                    <span class="text-[10px] uppercase tracking-widest mb-2 font-bold" data-i18n="hero-scroll">Explorer</span>
+                    <i class="ph ph-mouse-simple text-2xl"></i>
+                </div>
             </header>
 
-            <!-- 3D CAMPUS SECTION -->
+            <!-- SECTION CAMPUS 3D -->
             <section id="campus" class="py-20 md:py-32 px-4 md:px-6 relative z-10">
-                <div class="max-w-7xl mx-auto">
+                <div class="glow-bg w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-200/40 top-0 left-0"></div>
+                
+                <div class="max-w-7xl mx-auto relative">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gs-reveal">
                         <div>
                             <h2 class="text-xs md:text-sm uppercase tracking-widest text-france-red mb-2 font-semibold">Infrastructures</h2>
                             <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-france-blue">Notre campus</h3>
                         </div>
                         <p class="max-w-md text-sm md:text-base text-gray-600 mt-4 md:mt-0 font-medium">
-                            Naviguez dans notre maquette 3D interactive pour découvrir nos installations de pointe.
+                            Naviguez dans notre maquette 3D interactive pour découvrir nos installations de pointe conçues pour l'épanouissement.
                         </p>
                     </div>
+
                     <div class="relative glass-card rounded-2xl md:rounded-3xl p-1 md:p-2 gs-reveal border border-white">
-                        <div class="absolute top-4 left-4 md:top-6 md:left-6 z-10 glass px-3 py-2 md:px-4 md:py-2 rounded-full flex items-center gap-2 text-xs md:text-sm font-bold text-white">
-                            <i class="ph ph-arrows-out-cardinal text-france-red animate-pulse"></i> Explorer
+                        <div class="absolute top-4 left-4 md:top-6 md:left-6 z-10 glass px-3 py-2 md:px-4 md:py-2 rounded-full flex items-center gap-2 text-xs md:text-sm font-bold text-white shadow-sm">
+                            <i class="ph ph-arrows-out-cardinal text-france-red text-lg animate-pulse"></i> <span class="hidden sm:inline">Cliquez et glissez pour explorer</span><span class="sm:hidden">Explorer</span>
                         </div>
-                        <div id="campus-tooltip" class="absolute z-20 pointer-events-none opacity-0 transition-opacity duration-300 glass px-4 py-3 rounded-xl min-w-[200px] border border-white/20">
-                            <h4 id="tooltip-title" class="font-serif font-bold text-white">Bâtiment</h4>
-                            <p id="tooltip-desc" class="text-xs text-white/90">Description...</p>
+                        
+                        <div id="campus-tooltip" class="absolute z-20 pointer-events-none opacity-0 transition-opacity duration-300 glass px-4 py-3 md:px-5 md:py-4 rounded-xl min-w-[200px] md:min-w-[240px] border border-white/20" style="transform: translate(-50%, -120%);">
+                            <h4 id="tooltip-title" class="font-serif font-bold text-base md:text-lg text-white">Bâtiment</h4>
+                            <p id="tooltip-desc" class="text-[11px] md:text-xs mt-1 md:mt-2 text-white/90 font-medium leading-relaxed">Description...</p>
                         </div>
-                        <div id="campus-canvas-container" class="rounded-xl md:rounded-[20px] h-[50vh] md:h-[60vh] bg-[#E5EAF0]"></div>
+                        
+                        <div id="campus-canvas-container" class="rounded-xl md:rounded-[20px] h-[50vh] md:h-[60vh] border border-white shadow-inner bg-[#E5EAF0]"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROGRAMMES & PÉDAGOGIES ACCUEIL -->
+            <section id="pedagogie-summary" class="py-20 md:py-32 relative">
+                <div class="glow-bg w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-red-100/60 top-1/2 right-0 transform -translate-y-1/2"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 md:px-6 mb-12 md:mb-16 gs-reveal text-center">
+                    <h2 class="text-xs md:text-sm uppercase tracking-widest text-france-red mb-2 md:mb-3 font-bold flex items-center justify-center gap-2">
+                        <i class="ph ph-sparkle"></i> Cursus d'Excellence
+                    </h2>
+                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif text-france-blue">Un parcours sur-mesure</h3>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col lg:flex-row gap-8 md:gap-12 gs-reveal">
+                    <!-- Menu vertical interactif -->
+                    <div class="lg:w-1/3 flex flex-col justify-center space-y-3 md:space-y-4">
+                        <button class="pedagogie-menu-item active text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-maternelle">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-france-blue group-hover:bg-france-red group-hover:text-white transition-colors border border-gray-100"><i class="ph ph-baby text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-france-blue">Maternelle</div>
+                                    <div class="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">TPS à GS</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-primaire">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-france-blue group-hover:bg-france-red group-hover:text-white transition-colors border border-gray-100"><i class="ph ph-backpack text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-france-blue">Primaire</div>
+                                    <div class="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">CP au CM2</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-college">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-france-blue group-hover:bg-france-red group-hover:text-white transition-colors border border-gray-100"><i class="ph ph-books text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-france-blue">Collège</div>
+                                    <div class="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">6ème à 3ème</div>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="pedagogie-menu-item text-left group p-4 md:p-5 rounded-2xl" data-pane="pane-lycee">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-france-blue group-hover:bg-france-red group-hover:text-white transition-colors border border-gray-100"><i class="ph ph-graduation-cap text-xl md:text-2xl"></i></div>
+                                <div>
+                                    <div class="text-xl md:text-2xl font-serif font-bold text-france-blue">Lycée</div>
+                                    <div class="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-bold">2nde à Terminale</div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- Contenu dynamique -->
+                    <div class="lg:w-2/3 glass-card p-2 rounded-2xl md:rounded-3xl relative h-[400px] md:h-[500px] lg:h-[600px] border border-white">
+                        <div id="pane-maternelle" class="pedagogie-content-pane active h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Maternelle">
+                            <div class="absolute inset-0 bg-gradient-to-t from-france-blue via-france-blue/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-white shadow-sm text-france-red border border-gray-100 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Bilinguisme</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">L'éveil par le jeu</h4>
+                                <p class="text-xs md:text-base text-gray-200 mb-6 md:mb-8 max-w-lg leading-relaxed font-medium">Apprendre dans un environnement stimulant et bienveillant. Initiation à l'anglais et immersion douce pour développer la confiance en soi.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6 text-white">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-primaire" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Primaire">
+                            <div class="absolute inset-0 bg-gradient-to-t from-france-blue via-france-blue/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-white shadow-sm text-france-red border border-gray-100 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Fondamentaux</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Des bases solides</h4>
+                                <p class="text-xs md:text-base text-gray-200 mb-6 md:mb-8 max-w-lg leading-relaxed font-medium">Acquisition de l'esprit critique, projets collaboratifs interdisciplinaires et utilisation d'outils numériques innovants.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6 text-white">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-college" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Collège">
+                            <div class="absolute inset-0 bg-gradient-to-t from-france-blue via-france-blue/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-white shadow-sm text-france-red border border-gray-100 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">Autonomie</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Préparation & Certifications</h4>
+                                <p class="text-xs md:text-base text-gray-200 mb-6 md:mb-8 max-w-lg leading-relaxed font-medium">Un accompagnement personnalisé vers le Brevet. Laboratoires connectés, certifications Cambridge et méthodes de travail efficaces.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6 text-white">Découvrir le programme</button>
+                            </div>
+                        </div>
+                        <div id="pane-lycee" class="pedagogie-content-pane h-full w-full rounded-[14px] md:rounded-[20px] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000" alt="Lycée">
+                            <div class="absolute inset-0 bg-gradient-to-t from-france-blue via-france-blue/70 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6 md:p-12 w-full text-white">
+                                <span class="px-2 py-1 md:px-3 md:py-1 bg-white shadow-sm text-france-red border border-gray-100 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4 inline-block">BFI & Excellence</span>
+                                <h4 class="text-2xl md:text-4xl font-serif font-bold mb-2 md:mb-4">Passeport pour l'avenir</h4>
+                                <p class="text-xs md:text-base text-gray-200 mb-6 md:mb-8 max-w-lg leading-relaxed font-medium">100% de réussite au Bac. Préparation intensive pour l'enseignement supérieur mondial et orientation sur-mesure.</p>
+                                <button onclick="navigate('pedagogie')" class="btn-premium text-xs md:text-sm py-2 px-4 md:py-3 md:px-6 text-white">Découvrir le programme</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- VUE 2 : ÉCOLE (DÉTAILLÉE) -->
-        <div id="view-etablissement" class="view-section hidden-view pt-24 md:pt-32 pb-20">
-            <div class="relative w-[92%] max-w-7xl mx-auto h-[35vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
-                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=2000&auto=format&fit=crop')] bg-cover opacity-20"></div>
+        <div id="view-etablissement" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
+            <div class="relative w-[92%] max-w-7xl mx-auto h-[30vh] md:h-[40vh] bg-france-blue flex items-center justify-center overflow-hidden mb-10 md:mb-16 rounded-2xl md:rounded-3xl shadow-lg">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=2000&auto=format&fit=crop')] bg-cover opacity-30"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent"></div>
                 <div class="relative z-10 text-center px-4">
                     <h1 class="text-4xl md:text-6xl font-serif text-white mb-2">Notre <span class="italic text-france-light">École</span></h1>
                     <p class="text-gray-200 font-medium max-w-2xl">L'excellence académique française en Malaisie.</p>
                 </div>
             </div>
+            
             <div class="max-w-7xl mx-auto px-4 md:px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24 gs-reveal">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center mb-16 md:mb-24 gs-reveal">
                     <div>
                         <h2 class="text-xs uppercase tracking-widest text-france-red mb-3 font-bold">Le Mot de la Direction</h2>
-                        <h3 class="text-3xl md:text-4xl font-serif text-france-blue mb-6">Former les citoyens du monde</h3>
-                        <p class="text-base text-gray-700 leading-relaxed mb-6">Depuis sa création, EUROcampus s'engage à offrir une éducation d'excellence, alliant la rigueur du système éducatif français à une ouverture internationale inégalée. Notre campus accueille des élèves de plus de 45 nationalités, favorisant ainsi le multiculturalisme au quotidien.</p>
+                        <h3 class="text-2xl md:text-4xl font-serif text-france-blue mb-6">Former les citoyens du monde</h3>
+                        <p class="text-base text-gray-700 leading-relaxed mb-6">Depuis sa création, EUROcampus s'engage à offrir une éducation d'excellence, alliant la rigueur du système éducatif français à une ouverture internationale inégalée. Notre campus accueille des élèves de plus de 45 nationalités.</p>
                         <div class="flex items-center gap-4">
-                            <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-france-red"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover"></div>
-                            <div><div class="font-bold text-france-blue text-lg">Mme. Dubois</div><div class="text-france-red text-sm font-semibold">Proviseure</div></div>
+                            <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-france-red shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="font-bold text-france-blue text-lg">Mme. Dubois</div>
+                                <div class="text-france-red text-xs font-semibold uppercase">Proviseure d'EUROcampus</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="relative"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" class="rounded-3xl shadow-xl border border-white"></div>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" class="rounded-2xl md:rounded-3xl shadow-xl border border-white w-full object-cover h-[350px] md:h-[500px]">
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- VUE 3 : ÉDUCATION (CENTRÉE) -->
-        <div id="view-pedagogie" class="view-section hidden-view pt-24 md:pt-32 pb-20">
-            <div class="relative w-[92%] max-w-7xl mx-auto h-[35vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
-                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2000&auto=format&fit=crop')] bg-cover opacity-20"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent"></div>
+        <div id="view-pedagogie" class="view-section hidden-view pt-24 md:pt-32 pb-20 text-center">
+            <div class="relative w-[92%] max-w-7xl mx-auto h-[30vh] md:h-[40vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
+                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent opacity-60"></div>
                 <div class="relative z-10 text-center px-4">
-                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-2">Notre <span class="italic text-france-light">Éducation</span></h1>
-                    <p class="text-gray-200 font-medium max-w-2xl">Un parcours bilingue de la Maternelle au Baccalauréat.</p>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-2">Notre <span class="italic text-france-light">Éducation</span></h1>
+                    <p class="text-sm md:text-base text-gray-200 font-medium">De la Maternelle au Baccalauréat Français International.</p>
                 </div>
             </div>
-            <div class="max-w-6xl mx-auto px-4 md:px-6 space-y-24">
-                <div class="flex flex-col md:flex-row gap-12 items-center gs-reveal">
+            <div class="max-w-6xl mx-auto px-4 text-left space-y-16 md:space-y-24">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center gs-reveal">
                     <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800" class="w-full md:w-1/2 rounded-3xl shadow-lg">
                     <div class="w-full md:w-1/2">
-                        <div class="text-france-red font-bold mb-2">Cycle 1</div>
-                        <h3 class="text-3xl font-serif text-france-blue mb-4">École Maternelle</h3>
-                        <p class="text-gray-600 mb-6">Immersion linguistique douce et apprentissage par le jeu.</p>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-center gap-2"><i class="ph ph-check-circle text-france-red"></i> Bilinguisme Français/Anglais</li>
-                            <li class="flex items-center gap-2"><i class="ph ph-check-circle text-france-red"></i> Éveil à la motricité</li>
+                        <div class="text-france-red font-bold uppercase text-xs tracking-widest mb-2">Cycle 1</div>
+                        <h3 class="text-2xl md:text-3xl font-serif text-france-blue mb-4">École Maternelle</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6 font-medium">Une étape fondamentale pour donner envie d’apprendre et s’épanouir dans un cadre bilingue bienveillant.</p>
+                        <ul class="space-y-3 font-medium">
+                            <li class="flex items-center gap-3"><i class="ph ph-check-circle text-france-red text-xl"></i> Immersion linguistique précoce</li>
+                            <li class="flex items-center gap-3"><i class="ph ph-check-circle text-france-red text-xl"></i> Apprentissage par le jeu</li>
                         </ul>
                     </div>
                 </div>
@@ -324,47 +444,48 @@
         </div>
 
         <!-- VUE 4 : VIE SCOLAIRE (RESTAURÉE) -->
-        <div id="view-viescolaire" class="view-section hidden-view pt-24 md:pt-32 pb-20">
+        <div id="view-viescolaire" class="view-section hidden-view pt-24 md:pt-32 pb-20 relative">
             <div class="relative w-[92%] max-w-7xl mx-auto h-[35vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
-                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2000&auto=format&fit=crop')] bg-cover opacity-20"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent opacity-60"></div>
                 <div class="relative z-10 text-center px-4">
                     <h1 class="text-4xl md:text-6xl font-serif text-white mb-2">Vie <span class="italic text-france-light">Scolaire</span></h1>
-                    <p class="text-gray-200 font-medium">Épanouissement personnel et services dédiés.</p>
+                    <p class="text-gray-200 font-medium">Épanouissement personnel et services communautaires.</p>
                 </div>
             </div>
             <div class="max-w-7xl mx-auto px-4 md:px-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 gs-reveal">
-                    <div class="glass-card rounded-3xl overflow-hidden border border-white hover:border-france-red/50 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 gs-reveal">
+                    <div class="glass-card rounded-3xl overflow-hidden group border border-white hover:border-france-red/50 shadow-sm flex flex-col h-full">
                         <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=800" class="h-48 w-full object-cover">
-                        <div class="p-6">
+                        <div class="p-6 flex-grow">
                             <h4 class="font-bold text-xl text-france-blue mb-3">Académies Sportives</h4>
-                            <p class="text-sm text-gray-600">Natation, Football, Escalade. Des infrastructures de haut niveau.</p>
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed">Natation, Football, Escalade. Des infrastructures olympiques pour se dépasser chaque jour.</p>
                         </div>
                     </div>
-                    <div class="glass-card rounded-3xl overflow-hidden border border-white hover:border-france-red/50 shadow-sm">
+                    <div class="glass-card rounded-3xl overflow-hidden group border border-white hover:border-france-red/50 shadow-sm flex flex-col h-full">
                         <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=800" class="h-48 w-full object-cover">
-                        <div class="p-6">
+                        <div class="p-6 flex-grow">
                             <h4 class="font-bold text-xl text-france-blue mb-3">Arts & Culture</h4>
-                            <p class="text-sm text-gray-600">Théâtre, musique et expression artistique hebdomadaire.</p>
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed">Théâtre, musique et arts plastiques pour nourrir la créativité et l'expression de nos élèves.</p>
                         </div>
                     </div>
-                    <div class="glass-card rounded-3xl overflow-hidden border border-white hover:border-france-red/50 shadow-sm">
+                    <div class="glass-card rounded-3xl overflow-hidden group border border-white hover:border-france-red/50 shadow-sm flex flex-col h-full">
                         <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800" class="h-48 w-full object-cover">
-                        <div class="p-6">
+                        <div class="p-6 flex-grow">
                             <h4 class="font-bold text-xl text-france-blue mb-3">Tech & Sciences</h4>
-                            <p class="text-sm text-gray-600">Robotique et Coding clubs pour préparer le futur.</p>
+                            <p class="text-sm text-gray-600 font-medium leading-relaxed">Robotique et Coding clubs pour maîtriser les outils numériques et préparer l'avenir.</p>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 gs-reveal">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 gs-reveal mb-24">
                     <div class="glass-card p-10 rounded-3xl border-t-4 border-france-red bg-white/80">
+                        <div class="w-12 h-12 rounded-full bg-france-red/10 flex items-center justify-center text-france-red mb-6 text-2xl"><i class="ph ph-fork-knife"></i></div>
                         <h4 class="text-2xl font-serif text-france-blue mb-4">Restauration</h4>
-                        <p class="text-gray-600">Menus sains et variés préparés sur place avec des produits frais.</p>
+                        <p class="text-gray-600 font-medium leading-relaxed text-justify">Menus sains préparés sur place chaque jour avec des produits frais. Alliance de gastronomie française et saveurs locales (Options Halal et végétariennes).</p>
                     </div>
                     <div class="glass-card p-10 rounded-3xl border-t-4 border-france-blue bg-white/80">
-                        <h4 class="text-2xl font-serif text-france-blue mb-4">Transport</h4>
-                        <p class="text-gray-600">Réseau de bus sécurisé couvrant toute la ville de Kuala Lumpur.</p>
+                        <div class="w-12 h-12 rounded-full bg-france-blue/10 flex items-center justify-center text-france-blue mb-6 text-2xl"><i class="ph ph-bus"></i></div>
+                        <h4 class="text-2xl font-serif text-france-blue mb-4">Transport Scolaire</h4>
+                        <p class="text-gray-600 font-medium leading-relaxed text-justify">Réseau sécurisé couvrant toute la ville de Kuala Lumpur avec suivi en temps réel via une application mobile dédiée pour les parents.</p>
                     </div>
                 </div>
             </div>
@@ -372,29 +493,28 @@
 
         <!-- VUE 5 : ADMISSIONS (RESTAURÉE) -->
         <div id="view-admissions" class="view-section hidden-view pt-24 md:pt-32 pb-20">
-            <div class="relative w-[92%] max-w-7xl mx-auto h-[35vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
-                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2000&auto=format&fit=crop')] bg-cover opacity-20"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent"></div>
+             <div class="relative w-[92%] max-w-7xl mx-auto h-[35vh] bg-france-blue flex items-center justify-center overflow-hidden mb-16 rounded-3xl shadow-lg">
+                <div class="absolute inset-0 bg-gradient-to-t from-france-blue to-transparent opacity-60"></div>
                 <div class="relative z-10 text-center px-4">
                     <h1 class="text-4xl md:text-6xl font-serif text-white mb-2">Nos <span class="italic text-france-light">Admissions</span></h1>
                     <p class="text-gray-200 font-medium">Rejoignez une communauté d'élite internationale.</p>
                 </div>
             </div>
             <div class="max-w-5xl mx-auto px-4 md:px-6">
-                <div class="overflow-x-auto rounded-3xl border border-white shadow-xl mb-16 glass-card bg-white/80 gs-reveal">
-                    <table class="w-full text-left border-collapse text-france-blue">
-                        <thead><tr class="bg-gray-100 border-b border-gray-200"><th class="p-6 font-bold uppercase text-xs">Niveau Scolaire</th><th class="p-6 font-bold uppercase text-xs">Inscription</th><th class="p-6 font-bold uppercase text-xs text-france-red">Annuel</th></tr></thead>
-                        <tbody class="font-medium">
-                            <tr class="border-b border-gray-100"><td class="p-6">Maternelle (TPS-GS)</td><td class="p-6">6,000 MYR</td><td class="p-6">28,500 MYR</td></tr>
-                            <tr class="border-b border-gray-100"><td class="p-6">Primaire (CP-CM2)</td><td class="p-6">6,000 MYR</td><td class="p-6">35,200 MYR</td></tr>
-                            <tr class="border-b border-gray-100"><td class="p-6">Collège (6ème-3ème)</td><td class="p-6">6,000 MYR</td><td class="p-6">42,800 MYR</td></tr>
-                            <tr><td class="p-6">Lycée (2nde-Term)</td><td class="p-6">6,000 MYR</td><td class="p-6 font-bold text-france-red">51,000 MYR</td></tr>
+                <div class="overflow-x-auto rounded-2xl border border-white shadow-xl glass-card bg-white/80 gs-reveal mb-16">
+                    <table class="w-full text-left border-collapse text-france-blue min-w-[600px]">
+                        <thead><tr class="bg-gray-100 border-b border-gray-200"><th class="p-6 font-bold uppercase text-xs">Niveau Scolaire</th><th class="p-6 font-bold uppercase text-xs">Inscription (Unique)</th><th class="p-6 font-bold uppercase text-xs text-france-red">Scolarité (Annuel)</th></tr></thead>
+                        <tbody class="font-medium text-sm md:text-base">
+                            <tr class="border-b border-gray-100 hover:bg-white transition-colors"><td class="p-6">Maternelle (TPS-GS)</td><td class="p-6">6,000 MYR</td><td class="p-6 font-bold">28,500 MYR</td></tr>
+                            <tr class="border-b border-gray-100 hover:bg-white transition-colors"><td class="p-6">Primaire (CP-CM2)</td><td class="p-6">6,000 MYR</td><td class="p-6 font-bold">35,200 MYR</td></tr>
+                            <tr class="border-b border-gray-100 hover:bg-white transition-colors"><td class="p-6">Collège (6ème-3ème)</td><td class="p-6">6,000 MYR</td><td class="p-6 font-bold">42,800 MYR</td></tr>
+                            <tr class="hover:bg-white transition-colors"><td class="p-6">Lycée (2nde-Term)</td><td class="p-6">6,000 MYR</td><td class="p-6 font-bold text-france-red">51,000 MYR</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="glass-card p-10 rounded-3xl text-center border-t-4 border-france-red gs-reveal">
-                    <h3 class="text-2xl font-serif text-france-blue mb-4">Besoin d'aide ?</h3>
-                    <p class="text-gray-600 mb-8">Notre équipe est à votre disposition pour toute question relative aux inscriptions.</p>
+                    <h3 class="text-2xl font-serif text-france-blue mb-4">Une question sur votre dossier ?</h3>
+                    <p class="text-gray-600 mb-8 font-medium">Notre équipe des admissions vous accompagne dans chaque étape de votre demande d'inscription ou de bourse.</p>
                     <button class="btn-premium">Contacter les admissions</button>
                 </div>
             </div>
@@ -406,18 +526,26 @@
                 <div class="absolute inset-0 bg-gradient-to-br from-[#00205B] to-black opacity-60"></div>
                 <div class="relative z-10 text-center px-4">
                     <h1 class="text-4xl md:text-6xl font-serif text-white mb-2">Espace <span class="italic text-france-light">Professionnel</span></h1>
-                    <p class="text-gray-200 font-medium">Rejoignez le réseau d'excellence de l'AEFE.</p>
+                    <p class="text-gray-200 font-medium">Rejoignez le réseau d'excellence AEFE.</p>
                 </div>
             </div>
             <div class="max-w-5xl mx-auto px-4 md:px-6 gs-reveal">
-                <div class="space-y-6">
-                    <div class="glass-card p-8 rounded-3xl flex flex-col md:flex-row justify-between items-center group border border-white hover:border-france-red transition-all">
-                        <div>
-                            <span class="bg-blue-100 text-blue-700 text-[10px] px-3 py-1 rounded-full font-bold mb-2 inline-block">Rentrée 2026</span>
+                <div class="space-y-6 mb-20">
+                    <div class="glass-card p-8 rounded-3xl flex flex-col md:flex-row justify-between items-center group border border-white hover:border-france-red transition-all shadow-sm">
+                        <div class="mb-4 md:mb-0">
+                            <span class="bg-blue-100 text-blue-700 text-[10px] px-3 py-1 rounded-full font-bold mb-2 inline-block">Rentrée Sept. 2026</span>
                             <h3 class="text-xl font-bold text-france-blue">Professeur(e) des Écoles (Expatrié)</h3>
-                            <p class="text-gray-600 mt-2">Titulaire de l'Éducation Nationale requis.</p>
+                            <p class="text-sm text-gray-600 mt-2 font-medium">Cycles 2 & 3. Titulaire du MEN requis. Expérience internationale souhaitée.</p>
                         </div>
-                        <button class="btn-outline px-8 py-3 bg-white mt-4 md:mt-0">Postuler</button>
+                        <button class="btn-premium px-8 py-3 text-white">Postuler</button>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl flex flex-col md:flex-row justify-between items-center group border border-white hover:border-france-red transition-all shadow-sm">
+                        <div class="mb-4 md:mb-0">
+                            <span class="bg-red-100 text-france-red text-[10px] px-3 py-1 rounded-full font-bold mb-2 inline-block">Poste Local</span>
+                            <h3 class="text-xl font-bold text-france-blue">Assistant(e) de Vie Scolaire</h3>
+                            <p class="text-sm text-gray-600 mt-2 font-medium">Parfaitement bilingue Français/Anglais pour l'accompagnement pédagogique.</p>
+                        </div>
+                        <button class="btn-outline px-8 py-3 border-france-blue">Candidater</button>
                     </div>
                 </div>
             </div>
@@ -426,17 +554,17 @@
     </main>
 
     <footer class="bg-[#00102e] text-white pt-16 md:pt-20 pb-10 mt-20 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div>
-                <div class="w-12 h-12 border-2 border-france-red rounded-full flex items-center justify-center mb-6 bg-white/5"><span class="font-serif text-france-red font-bold text-xl">E</span></div>
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-center md:text-left">
+            <div class="col-span-1 md:col-span-1">
+                <div class="w-12 h-12 border-2 border-france-red rounded-full flex items-center justify-center mb-6 mx-auto md:mx-0 bg-white/5"><span class="font-serif text-france-red font-bold text-xl">E</span></div>
                 <h3 class="font-serif text-xl mb-4">EUROcampus</h3>
-                <p class="text-gray-400 text-sm">Le rayonnement de la France en Asie du Sud-Est.</p>
+                <p class="text-gray-400 text-sm font-medium leading-relaxed">Le rayonnement de la France et de l'excellence éducative en Asie du Sud-Est.</p>
             </div>
-            <div><h4 class="font-bold text-france-red mb-6">Navigation</h4><ul class="space-y-3 text-sm text-gray-300"><li><a href="#" onclick="navigate('etablissement')">L'École</a></li><li><a href="#" onclick="navigate('pedagogie')">Éducation</a></li><li><a href="#" onclick="navigate('admissions')">Admissions</a></li></ul></div>
-            <div><h4 class="font-bold text-france-red mb-6">Contact</h4><ul class="space-y-3 text-sm text-gray-300"><li><i class="ph ph-map-pin"></i> 34 Jalan Dutamas Raya, KL</li><li><i class="ph ph-phone"></i> +60 3 6250 4415</li></ul></div>
-            <div><h4 class="font-bold text-france-red mb-6">Réseaux</h4><div class="flex gap-4"><a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-france-red transition-all"><i class="ph ph-facebook-logo"></i></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-france-red transition-all"><i class="ph ph-instagram-logo"></i></a></div></div>
+            <div><h4 class="font-bold text-france-red mb-6 uppercase text-xs tracking-widest">Navigation</h4><ul class="space-y-3 text-sm text-gray-300 font-medium"><li><a href="#" onclick="navigate('etablissement')">L'École</a></li><li><a href="#" onclick="navigate('pedagogie')">Éducation</a></li><li><a href="#" onclick="navigate('admissions')">Admissions</a></li></ul></div>
+            <div><h4 class="font-bold text-france-red mb-6 uppercase text-xs tracking-widest">Contact</h4><ul class="space-y-3 text-sm text-gray-300 font-medium"><li><i class="ph ph-map-pin"></i> 34 Jalan Dutamas Raya, KL</li><li><i class="ph ph-phone"></i> +60 3 6250 4415</li></ul></div>
+            <div><h4 class="font-bold text-france-red mb-6 uppercase text-xs tracking-widest">Réseaux</h4><div class="flex gap-4 justify-center md:justify-start"><a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-france-red transition-all"><i class="ph ph-facebook-logo"></i></a><a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-france-red transition-all"><i class="ph ph-instagram-logo"></i></a></div></div>
         </div>
-        <div class="border-t border-white/10 mt-16 pt-8 text-center text-[10px] text-gray-500"><p>&copy; 2026 EUROcampus. Tous droits réservés.</p></div>
+        <div class="border-t border-white/10 pt-8 text-center text-[10px] text-gray-500 font-medium"><p>&copy; 2026 EUROcampus. Tous droits réservés.</p></div>
     </footer>
 
     <a href="tel:+60362504415" class="fixed bottom-6 right-6 h-14 min-w-[56px] px-0 hover:px-6 bg-france-red text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 z-50 group border border-france-red/50">
@@ -449,19 +577,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
+        // GLOBAL STATE
+        let currentView = 'home';
+
+        // NAVIGATION MOBILE
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         function toggleMobileMenu() {
             const isOpen = mobileMenu.classList.contains('translate-x-0');
-            mobileMenu.className = isOpen ? 'fixed inset-0 bg-france-blue/98 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center space-y-8 pointer-events-none opacity-0' : 'fixed inset-0 bg-france-blue/98 backdrop-blur-xl z-40 transform translate-x-0 transition-transform duration-300 flex flex-col items-center justify-center space-y-8 pointer-events-auto opacity-100';
+            mobileMenu.className = isOpen ? 'fixed inset-0 bg-[#F4F7F9]/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center space-y-8 pointer-events-none opacity-0' : 'fixed inset-0 bg-france-blue/98 backdrop-blur-xl z-40 transform translate-x-0 transition-transform duration-300 flex flex-col items-center justify-center space-y-8 pointer-events-auto opacity-100';
             mobileMenuBtn.innerHTML = isOpen ? '<i class="ph ph-list text-2xl"></i>' : '<i class="ph ph-x text-2xl"></i>';
             document.body.style.overflow = isOpen ? '' : 'hidden';
         }
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
+        // TRICOLORE STARS
         function createStars() {
             const sf = document.getElementById('starfield');
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 35; i++) {
                 const s = document.createElement('div'); s.classList.add('star');
                 const r = Math.random(); s.classList.add(r > 0.6 ? 'star-red' : r > 0.3 ? 'star-blue' : 'star-white');
                 const sz = Math.random() * 4 + 2; s.style.width = s.style.height = sz + 'px';
@@ -471,7 +604,7 @@
         }
         createStars();
 
-        let currentView = 'home';
+        // SPA SYSTEM
         function navigate(viewId) {
             currentView = viewId;
             document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden-view'));
@@ -482,10 +615,21 @@
             setTimeout(() => initScrollTriggers(), 100);
         }
 
+        // LOADER
         document.addEventListener('DOMContentLoaded', () => {
+            const forceClose = setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader && loader.style.display !== 'none') {
+                    loader.style.display = 'none';
+                    gsap.to('.gs-hero-anim', { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" });
+                    initScrollTriggers(); initCampusWebGL();
+                }
+            }, 3500);
+
             setTimeout(() => {
                 if (typeof gsap !== 'undefined') {
                     gsap.to('#loader', { opacity: 0, duration: 0.8, onComplete: () => {
+                        clearTimeout(forceClose);
                         document.getElementById('loader').style.display = 'none';
                         gsap.to('.gs-hero-anim', { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" });
                         initScrollTriggers(); initCampusWebGL();
@@ -513,6 +657,7 @@
             });
         });
 
+        // 3D HERO
         function initHeroWebGL() {
             if (typeof THREE === 'undefined') return;
             const canvas = document.getElementById('hero-canvas');
@@ -522,30 +667,18 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             const particlesGeo = new THREE.BufferGeometry();
-            const pCount = 300; const posArray = new Float32Array(pCount * 3);
+            const pCount = 250; const posArray = new Float32Array(pCount * 3);
             for(let i = 0; i < pCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 15;
             particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const canvasDot = document.createElement('canvas'); canvasDot.width = 16; canvasDot.height = 16;
-            const context = canvasDot.getContext('2d');
-            const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)'); gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-            context.fillStyle = gradient; context.fillRect(0, 0, 16, 16);
-            const material = new THREE.PointsMaterial({ size: 0.06, map: new THREE.CanvasTexture(canvasDot), transparent: true, blending: THREE.NormalBlending });
+            const material = new THREE.PointsMaterial({ size: 0.05, color: 0xFFFFFF, transparent: true, blending: THREE.AdditiveBlending });
             const mesh = new THREE.Points(particlesGeo, material);
             scene.add(mesh); camera.position.z = 3;
-            let mx = 0, my = 0;
-            document.addEventListener('mousemove', (e) => { mx = (e.clientX - window.innerWidth / 2) * 0.001; my = (e.clientY - window.innerHeight / 2) * 0.001; });
-            function animate() {
-                requestAnimationFrame(animate); if(currentView !== 'home') return; 
-                mesh.rotation.y += 0.001 + (mx - mesh.rotation.y) * 0.05;
-                mesh.rotation.x += 0.0005 + (my - mesh.rotation.x) * 0.05;
-                renderer.render(scene, camera);
-            }
+            function animate() { requestAnimationFrame(animate); if(currentView === 'home') { mesh.rotation.y += 0.001; renderer.render(scene, camera); } }
             animate();
-            window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
         }
         initHeroWebGL();
 
+        // 3D CAMPUS
         function initCampusWebGL() {
             if (typeof THREE === 'undefined') return;
             const container = document.getElementById('campus-canvas-container');
@@ -553,12 +686,14 @@
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 100);
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); container.appendChild(renderer.domElement);
-            scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-            const dl = new THREE.DirectionalLight(0xffffff, 1.2); dl.position.set(10, 20, 10); scene.add(dl);
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+            scene.add(new THREE.AmbientLight(0xffffff, 1));
+            
             const buildings = [];
             const matNormal = new THREE.MeshPhysicalMaterial({ color: 0x00205B, metalness: 0.3, roughness: 0.1, transparent: true, opacity: 0.9 });
-            const matHover = new THREE.MeshPhysicalMaterial({ color: 0xDA291C, metalness: 0.6, roughness: 0.1, emissive: 0x330000, transparent: true, opacity: 1 });
+            const matHover = new THREE.MeshPhysicalMaterial({ color: 0xDA291C, emissive: 0x330000, transparent: true, opacity: 1 });
+
             function createBuilding(w, h, d, x, z, name, desc) {
                 const geo = new THREE.BoxGeometry(w, h, d);
                 const mesh = new THREE.Mesh(geo, matNormal.clone());
@@ -568,74 +703,55 @@
                 mesh.add(new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xDA291C, transparent:true, opacity:0.3 })));
                 return mesh;
             }
-            scene.add(new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.MeshBasicMaterial({ color: 0xE5EAF0, side: THREE.DoubleSide })));
-            const gh = new THREE.GridHelper(30, 30, 0x00205B, 0x00205B); gh.material.opacity = 0.08; gh.material.transparent = true; gh.position.y = 0.01; scene.add(gh);
-            createBuilding(4, 2, 4, -5, -5, "École Maternelle", "Bilinguisme et motricité.");
-            createBuilding(6, 3, 5, 2, -4, "École Élémentaire", "Fondamentaux et projets.");
-            createBuilding(5, 5, 4, -4, 3, "Collège & Lycée", "Sciences et BFI.");
-            createBuilding(7, 1.5, 3, 3, 4, "Complexe Sportif", "Gymnase et piscine.");
-            createBuilding(3, 4, 3, 0, 0, "Administration", "Accueil et CDI.");
+
+            createBuilding(4, 2, 4, -5, -5, "Maternelle", "Cadre bilingue et motricité.");
+            createBuilding(6, 3, 5, 2, -4, "Primaire", "Classes multimédias et projets.");
+            createBuilding(5, 5, 4, -4, 3, "Secondaire", "Secteurs sciences et BFI.");
+            createBuilding(7, 1.5, 3, 3, 4, "Complexe Sportif", "Gymnase et piscine olympique.");
+            createBuilding(3, 4, 3, 0, 0, "Administration", "Accueil et vie scolaire.");
+
             camera.position.set(15, 12, 15); camera.lookAt(0, 0, 0);
             const ray = new THREE.Raycaster(); const mouse = new THREE.Vector2();
             let hovered = null;
             const tooltip = document.getElementById('campus-tooltip');
-            function onInt(clientX, clientY) {
+            container.addEventListener('mousemove', (e) => {
                 const rect = container.getBoundingClientRect();
-                mouse.x = ((clientX - rect.left) / container.clientWidth) * 2 - 1;
-                mouse.y = -((clientY - rect.top) / container.clientHeight) * 2 + 1;
-                tooltip.style.left = (clientX - rect.left) + 'px'; tooltip.style.top = (clientY - rect.top) + 'px';
-            }
-            container.addEventListener('mousemove', (e) => onInt(e.clientX, e.clientY));
-            let isD = false; let pM = { x: 0, y: 0 };
-            container.addEventListener('mousedown', (e) => { isD = true; pM = { x: e.offsetX, y: e.offsetY }; });
-            window.addEventListener('mouseup', () => isD = false);
-            container.addEventListener('mousemove', (e) => { if (isD) { scene.rotation.y += (e.offsetX - pM.x) * 0.01; pM = { x: e.offsetX, y: e.offsetY }; } });
+                mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+                tooltip.style.left = (e.clientX - rect.left) + 'px'; tooltip.style.top = (e.clientY - rect.top) + 'px';
+            });
+
             function anim() {
-                requestAnimationFrame(anim); if (currentView !== 'home') return;
-                if (container.clientWidth !== renderer.domElement.width) { camera.aspect = container.clientWidth / container.clientHeight; camera.updateProjectionMatrix(); renderer.setSize(container.clientWidth, container.clientHeight); }
-                if(!isD) scene.rotation.y += 0.001;
-                ray.setFromCamera(mouse, camera); const int = ray.intersectObjects(buildings);
-                if (int.length > 0) {
-                    const obj = int[0].object;
+                requestAnimationFrame(anim);
+                if (currentView !== 'home') return;
+                scene.rotation.y += 0.001;
+                ray.setFromCamera(mouse, camera);
+                const ints = ray.intersectObjects(buildings);
+                if (ints.length > 0) {
+                    const obj = ints[0].object;
                     if (hovered !== obj) {
                         if (hovered) hovered.material = hovered.userData.baseMaterial;
                         hovered = obj; hovered.material = matHover;
                         document.getElementById('tooltip-title').textContent = obj.userData.name;
                         document.getElementById('tooltip-desc').textContent = obj.userData.desc;
-                        tooltip.style.opacity = 1; document.body.style.cursor = 'pointer';
+                        tooltip.style.opacity = 1;
                     }
-                } else {
-                    if (hovered) { hovered.material = hovered.userData.baseMaterial; hovered = null; tooltip.style.opacity = 0; document.body.style.cursor = 'default'; }
-                }
+                } else { if (hovered) { hovered.material = hovered.userData.baseMaterial; hovered = null; tooltip.style.opacity = 0; } }
                 renderer.render(scene, camera);
             }
             anim();
         }
-        
+
+        // TRANSLATIONS
         const translations = {
-            fr: {
-                "nav-ecole": "École", "nav-edu": "Éducation", "nav-vie": "Vie Scolaire", "nav-adm": "Admission", "nav-pro": "Professionnelle", "nav-insc": "Inscription",
-                "hero-badge": "Kuala Lumpur, Malaisie",
-                "hero-title": `<span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">EURO</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#DA291C] to-[#A61911] drop-shadow-[0_0_30px_rgba(218,41,28,0.4)]">campus</span><br>\n<span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light mt-4 md:mt-6 block tracking-[0.2em] uppercase">Excellence. Ouverture. Réussite.</span>`,
-                "hero-p": "Un enseignement d'excellence française dans un environnement profondément multiculturel et technologiquement avancé.",
-                "hero-btn-camp": "Découvrir le campus", "hero-btn-adm": `Admission <i class="ph ph-arrow-right"></i>`, "hero-scroll": "Explorer"
-            },
-            en: {
-                "nav-ecole": "School", "nav-edu": "Education", "nav-vie": "School Life", "nav-adm": "Admissions", "nav-pro": "Careers", "nav-insc": "Apply Now",
-                "hero-badge": "Kuala Lumpur, Malaysia",
-                "hero-title": `<span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">EURO</span><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#DA291C] to-[#A61911] drop-shadow-[0_0_30px_rgba(218,41,28,0.4)]">campus</span><br>\n<span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light mt-4 md:mt-6 block tracking-[0.2em] uppercase">Excellence. Openness. Success.</span>`,
-                "hero-p": "French educational excellence in a deeply multicultural and technologiquement advanced environment.",
-                "hero-btn-camp": "Discover campus", "hero-btn-adm": `Admissions <i class="ph ph-arrow-right"></i>`, "hero-scroll": "Scroll"
-            }
+            fr: { "nav-ecole": "École", "nav-edu": "Éducation", "nav-vie": "Vie Scolaire", "nav-adm": "Admission", "nav-pro": "Professionnelle", "nav-insc": "Inscription" },
+            en: { "nav-ecole": "School", "nav-edu": "Education", "nav-vie": "Life", "nav-adm": "Admissions", "nav-pro": "Careers", "nav-insc": "Apply" }
         };
-        const btnFrs = document.querySelectorAll('.lang-fr'); const btnEns = document.querySelectorAll('.lang-en');
         function setLang(lang) {
-            btnFrs.forEach(b => b.className = lang === 'fr' ? 'lang-fr cursor-pointer text-france-red border-b-2 border-france-red' : 'lang-fr cursor-pointer text-white/60');
-            btnEns.forEach(b => b.className = lang === 'en' ? 'lang-en cursor-pointer text-white font-bold' : 'lang-en cursor-pointer text-white/60');
             document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[lang][key]) el.innerHTML = translations[lang][key]; });
         }
-        btnFrs.forEach(btn => btn.addEventListener('click', () => setLang('fr')));
-        btnEns.forEach(btn => btn.addEventListener('click', () => setLang('en')));
+        document.querySelectorAll('.lang-fr').forEach(b => b.addEventListener('click', () => setLang('fr')));
+        document.querySelectorAll('.lang-en').forEach(b => b.addEventListener('click', () => setLang('en')));
     </script>
 </body>
 </html>
